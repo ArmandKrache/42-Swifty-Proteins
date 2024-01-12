@@ -2,7 +2,7 @@
 
 This is a 42 school project 
 
-xfun::embed_file("subject.pdf")
+The subject PDF is at the root of the repository : subject.pdf
 
 
 
