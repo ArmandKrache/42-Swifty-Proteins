@@ -12,8 +12,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:ionicons/ionicons.dart';
 
 @RoutePage()
-class BreakingNewsView extends HookWidget {
-  const BreakingNewsView({Key? key}) : super (key: key);
+class HomepageView extends HookWidget {
+  const HomepageView({Key? key}) : super (key: key);
 
   @override
   Widget build(BuildContext context) {

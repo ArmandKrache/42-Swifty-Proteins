@@ -15,12 +15,6 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
-    BreakingNewsRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const BreakingNewsView(),
-      );
-    },
     ArticleDetailsRoute.name: (routeData) {
       final args = routeData.argsAs<ArticleDetailsRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -31,21 +25,21 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    LoginRoute.name: (routeData) {
+      final args = routeData.argsAs<LoginRouteArgs>(
+          orElse: () => const LoginRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: LoginView(key: args.key),
+      );
+    },
+    HomepageRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const HomepageView(),
+      );
+    },
   };
-}
-
-/// generated route for
-/// [BreakingNewsView]
-class BreakingNewsRoute extends PageRouteInfo<void> {
-  const BreakingNewsRoute({List<PageRouteInfo>? children})
-      : super(
-          BreakingNewsRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'BreakingNewsRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -84,4 +78,46 @@ class ArticleDetailsRouteArgs {
   String toString() {
     return 'ArticleDetailsRouteArgs{key: $key, article: $article}';
   }
+}
+
+/// generated route for
+/// [LoginView]
+class LoginRoute extends PageRouteInfo<LoginRouteArgs> {
+  LoginRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          LoginRoute.name,
+          args: LoginRouteArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'LoginRoute';
+
+  static const PageInfo<LoginRouteArgs> page = PageInfo<LoginRouteArgs>(name);
+}
+
+class LoginRouteArgs {
+  const LoginRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'LoginRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
+/// [HomepageView]
+class HomepageRoute extends PageRouteInfo<void> {
+  const HomepageRoute({List<PageRouteInfo>? children})
+      : super(
+          HomepageRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'HomepageRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
