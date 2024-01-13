@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:swifty_companion/.secret.dart';
 import 'package:swifty_companion/src/domain/models/requests/login_request.dart';
 import 'package:swifty_companion/src/presentation/cubits/login/login_cubit.dart';
 import 'package:dio/dio.dart';
@@ -90,7 +91,7 @@ class LoginView extends HookWidget {
                         padding: MaterialStateProperty.all(const EdgeInsets.all(8)),
                       ),
                       onPressed: () {
-                        remoteLoginCubit.logIn(LoginRequest());
+                        remoteLoginCubit.logIn(LoginRequest(client_id: client_id, client_secret: client_secret));
                       },
                       child: Container(
                           padding: const EdgeInsets.all(8),
