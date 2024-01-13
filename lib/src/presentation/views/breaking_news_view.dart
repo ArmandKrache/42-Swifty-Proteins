@@ -35,15 +35,6 @@ class BreakingNewsView extends HookWidget {
           tr("breaking_news.daily_news"),
         style: const TextStyle(color: Colors.black),
         ),
-        actions: [
-          GestureDetector(
-            onTap: () => appRouter.push(const SavedArticlesRoute()),
-            child: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 12),
-              child: Icon(Ionicons.bookmark, color: Colors.amber,),
-            ),
-          ),
-        ],
       ),
       body: BlocBuilder<RemoteArticlesCubit, RemoteArticlesState>(
         builder: (_, state) {

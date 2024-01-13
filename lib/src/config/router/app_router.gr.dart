@@ -31,12 +31,6 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
-    SavedArticlesRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const SavedArticlesView(),
-      );
-    },
   };
 }
 
@@ -90,18 +84,4 @@ class ArticleDetailsRouteArgs {
   String toString() {
     return 'ArticleDetailsRouteArgs{key: $key, article: $article}';
   }
-}
-
-/// generated route for
-/// [SavedArticlesView]
-class SavedArticlesRoute extends PageRouteInfo<void> {
-  const SavedArticlesRoute({List<PageRouteInfo>? children})
-      : super(
-          SavedArticlesRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'SavedArticlesRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
 }
