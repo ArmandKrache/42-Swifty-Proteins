@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:template_app/src/config/router/app_router.dart';
-import 'package:template_app/src/domain/models/article.dart';
-import 'package:template_app/src/presentation/cubits/local_articles/local_articles_cubit.dart';
+import 'package:swifty_companion/src/config/router/app_router.dart';
+import 'package:swifty_companion/src/domain/models/article.dart';
+import 'package:swifty_companion/src/presentation/cubits/local_articles/local_articles_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

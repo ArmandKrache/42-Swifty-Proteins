@@ -1,5 +1,5 @@
-import 'package:template_app/src/utils/constants/nums.dart';
-import 'package:template_app/src/utils/constants/strings.dart';
+import 'package:swifty_companion/src/utils/constants/nums.dart';
+import 'package:swifty_companion/src/utils/constants/strings.dart';
 
 
 class BreakingNewsRequest {

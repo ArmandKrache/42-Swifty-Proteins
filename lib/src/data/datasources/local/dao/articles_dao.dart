@@ -1,5 +1,5 @@
-import 'package:template_app/src/domain/models/article.dart';
-import 'package:template_app/src/utils/constants/strings.dart';
+import 'package:swifty_companion/src/domain/models/article.dart';
+import 'package:swifty_companion/src/utils/constants/strings.dart';
 import 'package:floor/floor.dart';
 
 @dao

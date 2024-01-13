@@ -1,6 +1,6 @@
 {
-    "name": "template_app",
-    "short_name": "template_app",
+    "name": "swifty_companion",
+    "short_name": "swifty_companion",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

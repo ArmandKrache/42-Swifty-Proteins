@@ -1,7 +1,7 @@
 import 'dart:io' show HttpStatus;
 import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';
-import 'package:template_app/src/utils/resources/data_state.dart';
+import 'package:swifty_companion/src/utils/resources/data_state.dart';
 import 'package:retrofit/retrofit.dart';
 
 

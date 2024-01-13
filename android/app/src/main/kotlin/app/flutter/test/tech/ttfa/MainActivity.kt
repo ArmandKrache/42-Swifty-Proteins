@@ -1,4 +1,4 @@
-package app.flutter.test.tech.template_app
+package app.flutter.test.tech.swifty_companion
 
 import io.flutter.embedding.android.FlutterActivity
 

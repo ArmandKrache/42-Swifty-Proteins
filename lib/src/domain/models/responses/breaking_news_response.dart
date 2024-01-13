@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import 'package:template_app/src/domain/models/article.dart';
+import 'package:swifty_companion/src/domain/models/article.dart';
 
 class BreakingNewsResponse extends Equatable {
   final String status;
