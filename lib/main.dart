@@ -3,8 +3,8 @@ import 'package:swifty_companion/src/config/app_themes.dart';
 import 'package:swifty_companion/src/domain/repositories/api_repository.dart';
 import 'package:swifty_companion/src/locator.dart';
 import 'package:swifty_companion/src/presentation/cubits/login/login_cubit.dart';
-import 'package:swifty_companion/src/presentation/cubits/remote_articles/remote_articles_cubit.dart';
-import 'package:swifty_companion/src/utils/constants/strings.dart';
+import 'package:swifty_companion/src/presentation/cubits/remote_articles/homepage_cubit.dart';
+import 'package:swifty_companion/src/utils/constants.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,8 +31,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => RemoteArticlesCubit(
-          locator<ApiRepository>(),)..getBreakingNewsArticles(),
+        BlocProvider(create: (context) => HomepageCubit(
+          locator<ApiRepository>(),),
         ),
         BlocProvider(create: (context) => LoginCubit(
           locator<ApiRepository>(),),

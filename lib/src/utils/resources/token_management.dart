@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:swifty_companion/.secret.dart';
 import 'package:swifty_companion/src/config/config.dart';
+import 'package:swifty_companion/src/domain/models/requests/login_request.dart';
 import 'package:swifty_companion/src/domain/repositories/api_repository.dart';
 import 'package:swifty_companion/src/locator.dart';
 import 'package:swifty_companion/src/utils/resources/data_state.dart';
@@ -19,15 +21,11 @@ Future<void> deleteTokens() async {
 }
 
 Future<String?> refreshToken() async {
-  ///TODO : Handle Tokens refreshing
-  /*
-  String? token = await getRefreshToken();
-
-  final refreshResponse = await locator<ApiRepository>().refreshToken(refreshToken: token);
-  if (refreshResponse is DataSuccess) {
-    await storeAccessToken(refreshResponse.data!.access);
+  final response = await locator<ApiRepository>().getTokens(request: LoginRequest(client_secret: client_secret, client_id: client_id));
+  if (response is DataSuccess) {
+    await storeAccessToken(response.data!.accessToken);
     return await getAccessToken();
-  }*/
+  }
   return null;
 }
 
@@ -62,7 +60,7 @@ class TokenInterceptor extends Interceptor {
       final originalRequest = err.requestOptions;
       final uri = originalRequest.uri;
 
-      logger.d(isRefreshing[uri]);
+      //logger.d(isRefreshing[uri]);
 
       if (isRefreshing[uri] == null) {
         isRefreshing[uri] = true;

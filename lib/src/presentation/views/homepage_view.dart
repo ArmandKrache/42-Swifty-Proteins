@@ -1,15 +1,15 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:swifty_companion/src/config/app_assets.dart';
 import 'package:swifty_companion/src/config/router/app_router.dart';
-import 'package:swifty_companion/src/domain/models/article.dart';
-import 'package:swifty_companion/src/presentation/cubits/remote_articles/remote_articles_cubit.dart';
-import 'package:swifty_companion/src/presentation/widgets/article_widget.dart';
-import 'package:swifty_companion/src/utils/extensions/scroll_controller.dart';
+import 'package:swifty_companion/src/presentation/cubits/remote_articles/homepage_cubit.dart';
+import 'package:swifty_companion/src/presentation/widgets/CoalitionBanner.dart';
+import 'package:swifty_companion/src/utils/constants.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:ionicons/ionicons.dart';
 
 @RoutePage()
 class HomepageView extends HookWidget {
@@ -17,16 +17,10 @@ class HomepageView extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final remoteArticlesCubit = BlocProvider.of<RemoteArticlesCubit>(context);
-    final scrollController = useScrollController();
-
+    final homepageCubit = BlocProvider.of<HomepageCubit>(context);
 
     useEffect(() {
-      scrollController.onScrollEndsListener(() {
-        remoteArticlesCubit.getBreakingNewsArticles();
-      });
 
-      return scrollController.dispose;
     }, const []);
 
     return Scaffold(
@@ -35,20 +29,27 @@ class HomepageView extends HookWidget {
           tr("breaking_news.daily_news"),
         style: const TextStyle(color: Colors.black),
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: GestureDetector(
+              onTap: () {
+                homepageCubit.logOut();
+              },
+              child: const Icon(Icons.logout_outlined, color: Colors.redAccent),
+            ),
+          )
+        ],
       ),
-      body: BlocBuilder<RemoteArticlesCubit, RemoteArticlesState>(
+      body: BlocBuilder<HomepageCubit, HomepageState>(
         builder: (_, state) {
           switch (state.runtimeType) {
-            case RemoteArticlesLoading:
+            case HomepageLoading:
               return const Center(child: CupertinoActivityIndicator());
-            case RemoteArticlesFailed:
-              return const Center(child: Icon(Ionicons.refresh));
-            case RemoteArticlesSuccess:
-              return _buildArticles(
-                scrollController,
-                state.articles,
-                state.noMoreData,
-              );
+            case HomepageFailed:
+              return const Center(child: Icon(Icons.refresh));
+            case HomepageSuccess:
+              return _buildBody();
             default:
               return const SizedBox();
           }
@@ -57,31 +58,21 @@ class HomepageView extends HookWidget {
     );
   }
 
-  Widget _buildArticles(
-      ScrollController scrollController,
-      List<Article> articles,
-      bool noMoreData) {
-    return CustomScrollView(
-      controller: scrollController,
-      slivers: [
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-              (context, index) => ArticleWidget(
-                article: articles[index],
-                onArticlePressed: (element) => appRouter.push(ArticleDetailsRoute(article: element)),
+  Widget _buildBody() {
+    return const SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Center(
+                child: CoalitionBannerWidget(coalition: Coalition.order)
               ),
-              childCount: articles.length),
-        ),
-
-        if (!noMoreData)
-          const SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.only(top: 12, bottom: 32),
-              child: CupertinoActivityIndicator(),
-            ),
+              Center(
+                  child: CoalitionBannerWidget(coalition: Coalition.alliance)
+              ),
+            ],
           ),
-      ],
+        )
     );
   }
-
 }

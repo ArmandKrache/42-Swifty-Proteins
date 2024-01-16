@@ -1,7 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-import 'package:swifty_companion/src/domain/models/article.dart';
-
 class LoginResponse extends Equatable {
   final String accessToken;
   final String tokenType;

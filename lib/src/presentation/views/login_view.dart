@@ -1,5 +1,8 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:swifty_companion/.secret.dart';
+import 'package:swifty_companion/src/config/app_assets.dart';
+import 'package:swifty_companion/src/config/app_colors.dart';
 import 'package:swifty_companion/src/domain/models/requests/login_request.dart';
 import 'package:swifty_companion/src/presentation/cubits/login/login_cubit.dart';
 import 'package:dio/dio.dart';
@@ -25,98 +28,65 @@ class LoginView extends HookWidget {
     }, const []);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Login')),
       body: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {
           if (state.runtimeType == LoginLoading) {
             return const Center(child: CircularProgressIndicator());
           } else if (state.runtimeType == LoginFailed) {
-            return _buildLoginForm(context, loginCubit, state.exception);
+            return _buildBody(context, loginCubit, state.exception);
           } else {
-            return _buildLoginForm(context, loginCubit, null);
+            return _buildBody(context, loginCubit, null);
           }
         },
       ),
     );
   }
 
-  Widget _buildLoginForm(BuildContext context, LoginCubit remoteLoginCubit, DioException? error) {
-    return Container(
-      child: Center(
-        child: Column(
-          children: [
-            Container(
-              width: 600,
-              height: 300,
-              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
-              decoration: BoxDecoration(
-                color: Colors.deepPurpleAccent.withOpacity(0.4),
-              ),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text("Login", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
-                    TextField(
-                      controller: usernameController,
-                      cursorColor: Colors.deepPurple,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.deepPurple, style: BorderStyle.solid, width: 1.5)
-                        ),
-                        fillColor: Colors.white,
-                        filled: true,
-                        hintText: 'Username',
-                      ),
-                    ),
-                    TextField(
-                      controller: passwordController,
-                      cursorColor: Colors.deepPurple,
-                      obscureText: true,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.deepPurple, style: BorderStyle.solid, width: 1.5)
-                        ),
-                        fillColor: Colors.white,
-                        filled: true,
-                        hintText: 'Password',
-                      ),
-                    ),
-                    TextButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Colors.blue),
-                        textStyle: MaterialStateProperty.all(const TextStyle(color: Colors.white)),
-                        padding: MaterialStateProperty.all(const EdgeInsets.all(8)),
-                      ),
-                      onPressed: () {
-                        remoteLoginCubit.logIn(LoginRequest(client_id: client_id, client_secret: client_secret));
-                      },
-                      child: Container(
-                          padding: const EdgeInsets.all(8),
-                          child: const Text("Log in",
-                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),)
-                      ),
-                    ),
-                  ],
+  Widget _buildBody(BuildContext context, LoginCubit remoteLoginCubit, DioException? error) {
+    return Stack(
+      children: [
+        Image.asset(AppAssets.orderBackground, fit: BoxFit.fitHeight, height: double.maxFinite,),
+        SafeArea(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                const Expanded(child: SizedBox()),
+                SvgPicture.asset(AppAssets.white42LogoSVG, width: 192,),
+                const SizedBox(height: 8,),
+                const Text("SWIFTY COMPANION",
+                  style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
                 ),
-              ),
-            ),
-            Visibility(
-              visible: error != null,
-              child: Container(
-                margin: const EdgeInsets.only(top: 8),
-                child: Center(
-                  child: Text(error == null ? "" : error.response?.data.toString() ?? "",
-                    style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold, fontSize: 16),
+                const Expanded(flex: 3, child: SizedBox()),
+                TextButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(AppColors.order),
+                    textStyle: MaterialStateProperty.all(const TextStyle(color: Colors.white)),
+                    padding: MaterialStateProperty.all(const EdgeInsets.symmetric(vertical: 8, horizontal: 16)),
+                  ),
+                  onPressed: () {
+                    remoteLoginCubit.logIn(LoginRequest(client_id: client_id, client_secret: client_secret));
+                  },
+                  child: Container(
+                      padding: const EdgeInsets.all(8),
+                      child: const Text("Log in",
+                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                      ),
                   ),
                 ),
-              ),
+                Container(
+                  margin: const EdgeInsets.only(top: 8),
+                  child: Center(
+                    child: Text(error == null ? "" : error.response?.data.toString() ?? "",
+                      style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold, fontSize: 16),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
-      ),
+      ],
     );
   }
 }

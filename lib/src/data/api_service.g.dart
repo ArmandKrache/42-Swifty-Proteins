@@ -12,54 +12,11 @@ class _ApiService implements ApiService {
   _ApiService(
     this._dio, {
     this.baseUrl,
-  }) {
-    baseUrl ??= 'https://newsapi.org/v2';
-  }
+  });
 
   final Dio _dio;
 
   String? baseUrl;
-
-  @override
-  Future<HttpResponse<BreakingNewsResponse>> getBreakingNewsArticles({
-    String? country,
-    String? category,
-    int? page,
-    int? pageSize,
-    String? authorization,
-  }) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'country': country,
-      r'category': category,
-      r'page': page,
-      r'pageSize': pageSize,
-    };
-    queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{r'Authorization': authorization};
-    _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<BreakingNewsResponse>>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/top-headlines',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = BreakingNewsResponse.fromMap(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
-    return httpResponse;
-  }
 
   @override
   Future<HttpResponse<LoginResponse>> getTokens(
@@ -87,6 +44,34 @@ class _ApiService implements ApiService {
               baseUrl,
             ))));
     final value = LoginResponse.fromMap(_result.data!);
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
+  }
+
+  @override
+  Future<HttpResponse<TokenInfoResponse>> getTokenInfo() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HttpResponse<TokenInfoResponse>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'https://api.intra.42.fr/oauth/token/info',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = TokenInfoResponse.fromMap(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

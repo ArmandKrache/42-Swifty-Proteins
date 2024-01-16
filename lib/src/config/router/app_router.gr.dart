@@ -15,14 +15,10 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
-    ArticleDetailsRoute.name: (routeData) {
-      final args = routeData.argsAs<ArticleDetailsRouteArgs>();
+    HomepageRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: ArticleDetailsView(
-          key: args.key,
-          article: args.article,
-        ),
+        child: const HomepageView(),
       );
     },
     LoginRoute.name: (routeData) {
@@ -33,51 +29,21 @@ abstract class _$AppRouter extends RootStackRouter {
         child: LoginView(key: args.key),
       );
     },
-    HomepageRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const HomepageView(),
-      );
-    },
   };
 }
 
 /// generated route for
-/// [ArticleDetailsView]
-class ArticleDetailsRoute extends PageRouteInfo<ArticleDetailsRouteArgs> {
-  ArticleDetailsRoute({
-    Key? key,
-    required Article article,
-    List<PageRouteInfo>? children,
-  }) : super(
-          ArticleDetailsRoute.name,
-          args: ArticleDetailsRouteArgs(
-            key: key,
-            article: article,
-          ),
+/// [HomepageView]
+class HomepageRoute extends PageRouteInfo<void> {
+  const HomepageRoute({List<PageRouteInfo>? children})
+      : super(
+          HomepageRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'ArticleDetailsRoute';
+  static const String name = 'HomepageRoute';
 
-  static const PageInfo<ArticleDetailsRouteArgs> page =
-      PageInfo<ArticleDetailsRouteArgs>(name);
-}
-
-class ArticleDetailsRouteArgs {
-  const ArticleDetailsRouteArgs({
-    this.key,
-    required this.article,
-  });
-
-  final Key? key;
-
-  final Article article;
-
-  @override
-  String toString() {
-    return 'ArticleDetailsRouteArgs{key: $key, article: $article}';
-  }
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -106,18 +72,4 @@ class LoginRouteArgs {
   String toString() {
     return 'LoginRouteArgs{key: $key}';
   }
-}
-
-/// generated route for
-/// [HomepageView]
-class HomepageRoute extends PageRouteInfo<void> {
-  const HomepageRoute({List<PageRouteInfo>? children})
-      : super(
-          HomepageRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'HomepageRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
 }
