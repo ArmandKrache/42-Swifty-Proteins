@@ -58,26 +58,44 @@ class CoalitionBannerWidget extends StatelessWidget {
         title = orderTitle;
     }
 
-    return Column(
-      children: [
-        SizedBox(
-          width: width,
-          height: height,
-          child: Stack(
-            children: [
-              Center(child: SvgPicture.asset(banner, width: width,)),
-              Center(child: SvgPicture.asset(icon, width: width / 1.618,)),
-            ],
+    return SizedBox(
+      width: width + 16,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Visibility(
+            visible: titleVisibility,
+            child: Text(title,
+              style: TextStyle(fontWeight: FontWeight.w800, color: color, fontSize: 14),
+              maxLines: 2,
+              textAlign: TextAlign.center,
+            ),
           ),
-        ),
-        const SizedBox(height: 8,),
-        Visibility(
-          visible: titleVisibility,
-          child: Text(title,
-            style: TextStyle(fontWeight: FontWeight.w800, color: color),
+          SizedBox(
+            width: width,
+            height: height,
+            child: Stack(
+              children: [
+                Center(child: SvgPicture.asset(banner, width: width,)),
+                Center(child: SvgPicture.asset(icon, width: width / 1.618,)),
+              ],
+            ),
           ),
-        )
-      ],
+          const SizedBox(height: 8,),
+          Visibility(
+            visible: titleVisibility,
+            child: const Text("Score",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+            ),
+          ),
+          Visibility(
+            visible: titleVisibility,
+            child: Text("66742",
+              style: TextStyle(fontWeight: FontWeight.w800, color: color, fontSize: 18),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
