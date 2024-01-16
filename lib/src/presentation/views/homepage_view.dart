@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:swifty_companion/src/config/app_assets.dart';
 import 'package:swifty_companion/src/config/app_colors.dart';
 import 'package:swifty_companion/src/config/router/app_router.dart';
+import 'package:swifty_companion/src/domain/models/coalition/coalition.dart';
 import 'package:swifty_companion/src/presentation/cubits/remote_articles/homepage_cubit.dart';
 import 'package:swifty_companion/src/presentation/widgets/coalition_banner.dart';
 import 'package:swifty_companion/src/presentation/widgets/event_card.dart';
@@ -75,7 +76,7 @@ class HomepageView extends HookWidget {
 
   Widget _buildStudentSearchWidget(HomepageCubit homepageCubit, TextEditingController searchController) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -141,11 +142,10 @@ class HomepageView extends HookWidget {
               runSpacing: 8,
               spacing: 8,
               children: [
-                CoalitionBannerWidget(coalition: Coalition.order, width: 72,),
-                CoalitionBannerWidget(coalition: Coalition.alliance, width: 72,),
-                CoalitionBannerWidget(coalition: Coalition.assembly, width: 72,),
-                CoalitionBannerWidget(coalition: Coalition.federation, width: 72,),
-
+                CoalitionBannerWidget(coalition: Coalition(id: 0, name: "Order", score: 7777, coalition: CoalitionType.order), width: 72,),
+                CoalitionBannerWidget(coalition: Coalition(id: 0, name: "Alliance", score: 88812, coalition: CoalitionType.alliance), width: 72,),
+                CoalitionBannerWidget(coalition: Coalition(id: 0, name: "Assembly", score: 4242, coalition: CoalitionType.assembly), width: 72,),
+                CoalitionBannerWidget(coalition: Coalition(id: 0, name: "Federation", score: 667, coalition: CoalitionType.federation), width: 72,),
               ],
             ),
           )

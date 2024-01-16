@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:swifty_companion/src/config/app_assets.dart';
 import 'package:swifty_companion/src/config/app_colors.dart';
+import 'package:swifty_companion/src/domain/models/coalition/coalition.dart';
 import 'package:swifty_companion/src/utils/constants.dart';
 
 class CoalitionBannerWidget extends StatelessWidget {
@@ -26,26 +27,26 @@ class CoalitionBannerWidget extends StatelessWidget {
     Color color = AppColors.order;
     String title = "";
 
-    switch (coalition) {
-      case (Coalition.order):
+    switch (coalition.coalition) {
+      case (CoalitionType.order):
         banner = AppAssets.orderBanner;
         icon = AppAssets.orderIcon;
         color = AppColors.order;
         title = orderTitle;
         break;
-      case (Coalition.alliance):
+      case (CoalitionType.alliance):
         banner = AppAssets.allianceBanner;
         icon = AppAssets.allianceIcon;
         color = AppColors.alliance;
         title = allianceTitle;
         break;
-      case (Coalition.assembly):
+      case (CoalitionType.assembly):
         banner = AppAssets.assemblyBanner;
         icon = AppAssets.assemblyIcon;
         color = AppColors.assembly;
         title = assemblyTitle;
         break;
-      case (Coalition.federation):
+      case (CoalitionType.federation):
         banner = AppAssets.federationBanner;
         icon = AppAssets.federationIcon;
         color = AppColors.federation;
@@ -90,7 +91,7 @@ class CoalitionBannerWidget extends StatelessWidget {
           ),
           Visibility(
             visible: titleVisibility,
-            child: Text("66742",
+            child: Text(coalition.score.toString(),
               style: TextStyle(fontWeight: FontWeight.w800, color: color, fontSize: 18),
             ),
           ),

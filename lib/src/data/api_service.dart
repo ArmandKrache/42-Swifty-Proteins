@@ -1,5 +1,5 @@
-import 'package:swifty_companion/src/domain/models/responses/login_response.dart';
-import 'package:swifty_companion/src/domain/models/responses/token_info_response.dart';
+import 'package:swifty_companion/src/domain/models/login_response.dart';
+import 'package:swifty_companion/src/domain/models/token_info_response.dart';
 import 'package:swifty_companion/src/utils/constants.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';

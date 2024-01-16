@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:swifty_companion/.secret.dart';
 import 'package:swifty_companion/src/config/config.dart';
-import 'package:swifty_companion/src/domain/models/requests/login_request.dart';
+import 'package:swifty_companion/src/domain/models/login_request.dart';
 import 'package:swifty_companion/src/domain/repositories/api_repository.dart';
 import 'package:swifty_companion/src/locator.dart';
 import 'package:swifty_companion/src/utils/resources/data_state.dart';

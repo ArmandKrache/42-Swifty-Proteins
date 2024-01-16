@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:swifty_companion/src/config/config.dart';
 import 'package:swifty_companion/src/config/router/app_router.dart';
-import 'package:swifty_companion/src/domain/models/requests/login_request.dart';
+import 'package:swifty_companion/src/domain/models/login_request.dart';
 import 'package:swifty_companion/src/domain/repositories/api_repository.dart';
 import 'package:swifty_companion/src/presentation/cubits/base/base_cubit.dart';
 import 'package:dio/dio.dart';
