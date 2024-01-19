@@ -59,9 +59,9 @@ class HomepageView extends HookWidget {
           children: [
             _buildStudentSearchWidget(homepageCubit, searchController),
             const SizedBox(height: 16,),
-            _buildEventsWidget(homepageCubit),
-            const SizedBox(height: 16,),
             _buildCoalitionsWidget(homepageCubit),
+            const SizedBox(height: 16,),
+            _buildEventsWidget(homepageCubit),
             const SizedBox(height: 24,),
             GestureDetector(
               onTap: () {
@@ -89,8 +89,9 @@ class HomepageView extends HookWidget {
           CustomSearchBar(
             controller: searchController,
             onChanged: (query) async {
-              ///TODO: uncomment -  if (query != "")
-              homepageCubit.searchStudent(query: query);
+              if (query != "") {
+                homepageCubit.searchStudent(query: query);
+              }
             },
             margin: const EdgeInsets.all(8),
             width: double.maxFinite,
@@ -114,12 +115,21 @@ class HomepageView extends HookWidget {
                             margin: const EdgeInsets.symmetric(horizontal: 4),
                             child: GestureDetector(
                             onTap: () {
-                              appRouter.push(const StudentRoute());
+                              appRouter.push(StudentRoute(studentId: students[i].id.toString()));
                             },
                             child: Column(
                               children: [
-                                ///TODO : Safe Network assets
-                                Image.network(students[i].picture, width: 128,),
+                                Image.network(students[i].picture, width: 128, height: 160,
+                                  errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                                  return Center(
+                                      child: Container(
+                                        width: 128,
+                                        height: 160,
+                                        color: Colors.grey.withOpacity(0.3),
+                                          child: const Icon(Icons.person, size: 64, color: Colors.grey,)
+                                      ));
+                                  },
+                                ),
                                 const SizedBox(height: 2,),
                                 Text(students[i].login,
                                   style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.primary, fontSize: 15),

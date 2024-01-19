@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:swifty_companion/.secret.dart';
 import 'package:swifty_companion/src/config/app_assets.dart';
@@ -31,7 +32,7 @@ class LoginView extends HookWidget {
       body: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {
           if (state.runtimeType == LoginLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: CupertinoActivityIndicator());
           } else if (state.runtimeType == LoginFailed) {
             return _buildBody(context, loginCubit, state.exception);
           } else {

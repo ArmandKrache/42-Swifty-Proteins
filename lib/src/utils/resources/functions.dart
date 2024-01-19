@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 
-String preprocessPictureUrl(String pictureUrl, String baseUrl) {
-  if (pictureUrl.startsWith(baseUrl)) {
-    return pictureUrl;
-  } else {
-    return baseUrl + pictureUrl;
-  }
-}
 
 void displayErrorToast(String message) {
   showToast(

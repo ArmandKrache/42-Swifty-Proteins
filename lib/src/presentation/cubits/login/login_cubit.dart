@@ -46,8 +46,8 @@ class LoginCubit extends BaseCubit<LoginState, Map<String, dynamic>> {
       final expiresIn = response.data!.expiresIn;
 
       if (expiresIn > 0) {
-        ///TODO: uncomment for automatic login
-        //appRouter.push(const HomepageRoute());
+        appRouter.push(const HomepageRoute());
+      } else {
         emit(const LoginSuccess());
       }
     } else if (response is DataFailed) {

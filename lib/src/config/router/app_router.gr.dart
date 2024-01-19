@@ -30,9 +30,13 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     StudentRoute.name: (routeData) {
+      final args = routeData.argsAs<StudentRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const StudentView(),
+        child: StudentView(
+          key: args.key,
+          studentId: args.studentId,
+        ),
       );
     },
   };
@@ -82,14 +86,38 @@ class LoginRouteArgs {
 
 /// generated route for
 /// [StudentView]
-class StudentRoute extends PageRouteInfo<void> {
-  const StudentRoute({List<PageRouteInfo>? children})
-      : super(
+class StudentRoute extends PageRouteInfo<StudentRouteArgs> {
+  StudentRoute({
+    Key? key,
+    required String studentId,
+    List<PageRouteInfo>? children,
+  }) : super(
           StudentRoute.name,
+          args: StudentRouteArgs(
+            key: key,
+            studentId: studentId,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'StudentRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<StudentRouteArgs> page =
+      PageInfo<StudentRouteArgs>(name);
+}
+
+class StudentRouteArgs {
+  const StudentRouteArgs({
+    this.key,
+    required this.studentId,
+  });
+
+  final Key? key;
+
+  final String studentId;
+
+  @override
+  String toString() {
+    return 'StudentRouteArgs{key: $key, studentId: $studentId}';
+  }
 }

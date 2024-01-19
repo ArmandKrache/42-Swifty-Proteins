@@ -24,42 +24,6 @@ class CoalitionBannerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String banner = "";
-    String icon = "";
-    Color color = AppColors.order;
-    String title = "";
-
-    switch (coalition.coalition) {
-      case (CoalitionType.order):
-        banner = AppAssets.orderBanner;
-        icon = AppAssets.orderIcon;
-        color = AppColors.order;
-        title = orderTitle;
-        break;
-      case (CoalitionType.alliance):
-        banner = AppAssets.allianceBanner;
-        icon = AppAssets.allianceIcon;
-        color = AppColors.alliance;
-        title = allianceTitle;
-        break;
-      case (CoalitionType.assembly):
-        banner = AppAssets.assemblyBanner;
-        icon = AppAssets.assemblyIcon;
-        color = AppColors.assembly;
-        title = assemblyTitle;
-        break;
-      case (CoalitionType.federation):
-        banner = AppAssets.federationBanner;
-        icon = AppAssets.federationIcon;
-        color = AppColors.federation;
-        title = federationTitle;
-        break;
-      default:
-        banner = AppAssets.orderBanner;
-        icon = AppAssets.orderIcon;
-        color = AppColors.order;
-        title = orderTitle;
-    }
 
     return SizedBox(
       width: width + 16,
@@ -68,8 +32,8 @@ class CoalitionBannerWidget extends StatelessWidget {
         children: [
           Visibility(
             visible: titleVisibility,
-            child: Text(title,
-              style: TextStyle(fontWeight: FontWeight.w800, color: color, fontSize: 14),
+            child: Text(AppAssets.getCoalitionTitle(coalition.coalition),
+              style: TextStyle(fontWeight: FontWeight.w800, color: AppAssets.getCoalitionColor(coalition.coalition), fontSize: 14),
               maxLines: 2,
               textAlign: TextAlign.center,
             ),
@@ -79,8 +43,8 @@ class CoalitionBannerWidget extends StatelessWidget {
             height: height,
             child: Stack(
               children: [
-                Center(child: SvgPicture.asset(banner, width: width,)),
-                Center(child: SvgPicture.asset(icon, width: width / 1.618,)),
+                Center(child: SvgPicture.asset(AppAssets.getCoalitionBanner(coalition.coalition), width: width,)),
+                Center(child: SvgPicture.asset(AppAssets.getCoalitionIcon(coalition.coalition), width: width / 1.618,)),
               ],
             ),
           ),
@@ -94,7 +58,7 @@ class CoalitionBannerWidget extends StatelessWidget {
           Visibility(
             visible: scoreVisibility,
             child: Text(coalition.score.toString(),
-              style: TextStyle(fontWeight: FontWeight.w800, color: color, fontSize: 18),
+              style: TextStyle(fontWeight: FontWeight.w800, color: AppAssets.getCoalitionColor(coalition.coalition), fontSize: 18),
             ),
           ),
         ],

@@ -45,11 +45,12 @@ class EventCardWidget extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.all(4),
-      margin: const EdgeInsets.symmetric(vertical: 2),
+      margin: const EdgeInsets.symmetric(vertical: 4),
       width: double.maxFinite,
       decoration: BoxDecoration(
         border: Border.all(color: borderColor, width: 2),
-        borderRadius: BorderRadius.circular(4)
+        borderRadius: BorderRadius.circular(4),
+        color: borderColor.withOpacity(0.1)
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
