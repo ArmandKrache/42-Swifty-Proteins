@@ -14,9 +14,9 @@ class Coalition extends Equatable {
   final CoalitionType coalition;
 
   const Coalition({
-    required this.id,
-    required this.name,
-    required this.score,
+    this.id = -1,
+    this.name = "",
+    this.score = 0,
     required this.coalition,
   });
 

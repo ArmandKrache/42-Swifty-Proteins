@@ -24,7 +24,7 @@ class Project extends Equatable {
       mark: map['final_mark'] ?? "",
       status: map['status'] ?? "",
       projectId: map['projectId'] ?? -1,
-      name: map['name'] ?? "",
+      name: map["project"]['name'] ?? "",
       cursusId: (map['cursus_ids'] as List).first ?? -1,
     );
   }

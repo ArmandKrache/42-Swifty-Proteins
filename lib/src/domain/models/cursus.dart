@@ -30,7 +30,7 @@ class Cursus extends Equatable {
 
 class Skill extends Equatable {
   final int id;
-  final int level;
+  final double level;
   final String name;
 
   const Skill({
@@ -42,9 +42,9 @@ class Skill extends Equatable {
 
   factory Skill.fromMap(Map<String, dynamic> map) {
     return Skill(
-      id: map['level'] ?? -1,
-      level: map['grade'] ?? 0,
-      name: map['login'] ?? "",
+      id: map['id'] ?? -1,
+      level: map['level'] ?? 0.0,
+      name: map['name'] ?? "",
     );
   }
 

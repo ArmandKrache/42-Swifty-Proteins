@@ -11,6 +11,7 @@ class CoalitionBannerWidget extends StatelessWidget {
   final double width;
   final double height;
   final bool titleVisibility;
+  final bool scoreVisibility;
 
   const CoalitionBannerWidget({
     super.key,
@@ -18,6 +19,7 @@ class CoalitionBannerWidget extends StatelessWidget {
     this.width = 96,
     this.height = 128,
     this.titleVisibility = true,
+    this.scoreVisibility = true,
   });
 
   @override
@@ -84,13 +86,13 @@ class CoalitionBannerWidget extends StatelessWidget {
           ),
           const SizedBox(height: 8,),
           Visibility(
-            visible: titleVisibility,
+            visible: scoreVisibility,
             child: const Text("Score",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
             ),
           ),
           Visibility(
-            visible: titleVisibility,
+            visible: scoreVisibility,
             child: Text(coalition.score.toString(),
               style: TextStyle(fontWeight: FontWeight.w800, color: color, fontSize: 18),
             ),

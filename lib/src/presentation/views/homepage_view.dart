@@ -56,9 +56,9 @@ class HomepageView extends HookWidget {
           children: [
             _buildStudentSearchWidget(homepageCubit, searchController),
             const SizedBox(height: 16,),
-            _buildCoalitionsWidget(),
-            const SizedBox(height: 16,),
             _buildAgendaWidget(),
+            const SizedBox(height: 16,),
+            _buildCoalitionsWidget(),
             const SizedBox(height: 24,),
             GestureDetector(
               onTap: () {
@@ -165,8 +165,8 @@ class HomepageView extends HookWidget {
           const SizedBox(height: 4,),
           SingleChildScrollView(
             scrollDirection: Axis.vertical,
-            child: Container(
-              height: 416,
+            child: SizedBox(
+              height: 298,
               child: ListView.builder(
                 itemCount: 10, // Adjust this based on your actual item count
                 itemBuilder: (context, index) {

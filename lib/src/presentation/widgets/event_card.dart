@@ -3,12 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:swifty_companion/src/config/app_assets.dart';
 import 'package:swifty_companion/src/config/app_colors.dart';
+import 'package:swifty_companion/src/domain/models/event/event.dart';
 import 'package:swifty_companion/src/utils/constants.dart';
 
 class EventCardWidget extends StatelessWidget {
+  /*final Event event;*/
 
   const EventCardWidget({
     super.key,
+    /*required this.event*/
   });
 
   @override
@@ -20,8 +23,9 @@ class EventCardWidget extends StatelessWidget {
       width: double.maxFinite,
       decoration: BoxDecoration(
         border: Border.all(color: AppColors.event),
+        borderRadius: BorderRadius.circular(4)
       ),
-      child: Column(
+      child: const Column(
         children: [
           Text("[42Entrepreneurs] Soirée Pizza Start-up 🍕 Spécial FinTech"),
           SizedBox(height: 4,),
