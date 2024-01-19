@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:swifty_companion/src/domain/models/coalition/coalition.dart';
 import 'package:swifty_companion/src/domain/models/cursus.dart';
 import 'package:swifty_companion/src/domain/models/project.dart';
 
@@ -14,8 +15,9 @@ class StudentDetails extends Equatable {
   final int correctionPoints;
   final Cursus cursus;
   final List<Project> projects;
+  Coalition coalition;
 
-  const StudentDetails({
+  StudentDetails({
     required this.id,
     required this.email,
     required this.login,
@@ -27,6 +29,7 @@ class StudentDetails extends Equatable {
     required this.correctionPoints,
     required this.cursus,
     required this.projects,
+    required this.coalition,
   });
 
 
@@ -53,6 +56,7 @@ class StudentDetails extends Equatable {
       projects: List<Project>.from((map['projects_users'] ?? []).map<dynamic>((element) {
         return Project.fromMap(element);
       })),
+      coalition: Coalition.empty()
     );
   }
 

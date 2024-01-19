@@ -2,9 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:swifty_companion/src/config/app_assets.dart';
-import 'package:swifty_companion/src/config/app_colors.dart';
 import 'package:swifty_companion/src/domain/models/coalition/coalition.dart';
-import 'package:swifty_companion/src/utils/constants.dart';
+import 'package:swifty_companion/src/utils/coalition_functions.dart';
 
 class CoalitionBannerWidget extends StatelessWidget {
   final Coalition coalition;
@@ -32,8 +31,8 @@ class CoalitionBannerWidget extends StatelessWidget {
         children: [
           Visibility(
             visible: titleVisibility,
-            child: Text(AppAssets.getCoalitionTitle(coalition.coalition),
-              style: TextStyle(fontWeight: FontWeight.w800, color: AppAssets.getCoalitionColor(coalition.coalition), fontSize: 14),
+            child: Text(getCoalitionTitle(coalition.coalition),
+              style: TextStyle(fontWeight: FontWeight.w800, color: getCoalitionColor(coalition.coalition), fontSize: 14),
               maxLines: 2,
               textAlign: TextAlign.center,
             ),
@@ -43,8 +42,8 @@ class CoalitionBannerWidget extends StatelessWidget {
             height: height,
             child: Stack(
               children: [
-                Center(child: SvgPicture.asset(AppAssets.getCoalitionBanner(coalition.coalition), width: width,)),
-                Center(child: SvgPicture.asset(AppAssets.getCoalitionIcon(coalition.coalition), width: width / 1.618,)),
+                Center(child: SvgPicture.asset(getCoalitionBanner(coalition.coalition), width: width,)),
+                Center(child: SvgPicture.asset(getCoalitionIcon(coalition.coalition), width: width / 1.618,)),
               ],
             ),
           ),
@@ -58,7 +57,7 @@ class CoalitionBannerWidget extends StatelessWidget {
           Visibility(
             visible: scoreVisibility,
             child: Text(coalition.score.toString(),
-              style: TextStyle(fontWeight: FontWeight.w800, color: AppAssets.getCoalitionColor(coalition.coalition), fontSize: 18),
+              style: TextStyle(fontWeight: FontWeight.w800, color: getCoalitionColor(coalition.coalition), fontSize: 18),
             ),
           ),
         ],

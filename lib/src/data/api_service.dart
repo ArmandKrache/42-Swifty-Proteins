@@ -1,12 +1,12 @@
 import 'package:swifty_companion/src/config/config.dart';
-import 'package:swifty_companion/src/domain/models/coalition/coalition_list_response.dart';
+import 'package:swifty_companion/src/domain/models/coalition/campus_coalitions_list_response.dart';
+import 'package:swifty_companion/src/domain/models/coalition/user_coalitions_list_response.dart';
 import 'package:swifty_companion/src/domain/models/event/event_list_response.dart';
 import 'package:swifty_companion/src/domain/models/login_response.dart';
 import 'package:swifty_companion/src/domain/models/student/student.dart';
 import 'package:swifty_companion/src/domain/models/student/student_details.dart';
 import 'package:swifty_companion/src/domain/models/student/student_list_response.dart';
 import 'package:swifty_companion/src/domain/models/token_info_response.dart';
-import 'package:swifty_companion/src/utils/constants.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -29,9 +29,11 @@ abstract class ApiService {
   Future<HttpResponse<StudentDetails>> getStudentDetails(@Path() String id);
 
   @GET('v2/blocs?filter%5Bid%5D={id}')
-  Future<HttpResponse<CoalitionListResponse>> getCoalitions({@Path() required String id});
+  Future<HttpResponse<CampusCoalitionListResponse>> getCoalitions({@Path() required String id});
 
   @GET('v2/events?campus_id=1&filter[future]=true&sort=begin_at')
   Future<HttpResponse<EventListResponse>> getParisFutureEvents();
 
+  @GET('v2/coalitions?user_id={id}')
+  Future<HttpResponse<UserCoalitionListResponse>> getUserCoalitions({@Path() required String id});
 }

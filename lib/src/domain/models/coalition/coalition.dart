@@ -11,12 +11,14 @@ enum CoalitionType {
 class Coalition extends Equatable {
   final int id;
   final String name;
+  final String slug;
   final int score;
   final CoalitionType coalition;
 
   const Coalition({
     this.id = -1,
     this.name = "",
+    this.slug = "",
     this.score = 0,
     required this.coalition,
   });
@@ -42,9 +44,14 @@ class Coalition extends Equatable {
     return Coalition(
       id: map['id'] ?? -1,
       name: map['name'] ?? "",
+      slug: map['slug'] ?? "",
       score: map['score'] ?? 0,
       coalition: coalition,
     );
+  }
+
+  factory Coalition.empty() {
+    return const Coalition(coalition: CoalitionType.order);
   }
 
   @override

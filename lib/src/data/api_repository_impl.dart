@@ -1,15 +1,14 @@
 import 'package:swifty_companion/src/data/base/base_api_repository.dart';
 import 'package:swifty_companion/src/data/api_service.dart';
-import 'package:swifty_companion/src/domain/models/coalition/coalition_list_response.dart';
+import 'package:swifty_companion/src/domain/models/coalition/campus_coalitions_list_response.dart';
+import 'package:swifty_companion/src/domain/models/coalition/user_coalitions_list_response.dart';
 import 'package:swifty_companion/src/domain/models/event/event_list_response.dart';
 import 'package:swifty_companion/src/domain/models/login_request.dart';
 import 'package:swifty_companion/src/domain/models/login_response.dart';
-import 'package:swifty_companion/src/domain/models/student/student.dart';
 import 'package:swifty_companion/src/domain/models/student/student_details.dart';
 import 'package:swifty_companion/src/domain/models/student/student_list_response.dart';
 import 'package:swifty_companion/src/domain/models/token_info_response.dart';
 import 'package:swifty_companion/src/domain/repositories/api_repository.dart';
-import 'package:swifty_companion/src/utils/constants.dart';
 import 'package:swifty_companion/src/utils/resources/data_state.dart';
 
 class ApiRepositoryImpl extends BaseApiRepository implements ApiRepository {
@@ -51,14 +50,21 @@ class ApiRepositoryImpl extends BaseApiRepository implements ApiRepository {
   }
 
   @override
-  Future<DataState<CoalitionListResponse>> getCoalitions({
+  Future<DataState<CampusCoalitionListResponse>> getCoalitions({
     required String id
   }) {
-    return getState0f<CoalitionListResponse>(request: () => _apiService.getCoalitions(id: id));
+    return getState0f<CampusCoalitionListResponse>(request: () => _apiService.getCoalitions(id: id));
   }
 
   @override
   Future<DataState<EventListResponse>> getParisFutureEvents() {
     return getState0f<EventListResponse>(request: () => _apiService.getParisFutureEvents());
+  }
+
+  @override
+  Future<DataState<UserCoalitionListResponse>> getUserCoalitions({
+    required String id
+  }) {
+    return getState0f<UserCoalitionListResponse>(request: () => _apiService.getUserCoalitions(id: id));
   }
 }

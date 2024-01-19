@@ -1,4 +1,5 @@
-import 'package:swifty_companion/src/domain/models/coalition/coalition_list_response.dart';
+import 'package:swifty_companion/src/domain/models/coalition/campus_coalitions_list_response.dart';
+import 'package:swifty_companion/src/domain/models/coalition/user_coalitions_list_response.dart';
 import 'package:swifty_companion/src/domain/models/event/event_list_response.dart';
 import 'package:swifty_companion/src/domain/models/login_request.dart';
 import 'package:swifty_companion/src/domain/models/login_response.dart';
@@ -23,10 +24,14 @@ abstract class ApiRepository {
     required String id,
   });
 
-  Future<DataState<CoalitionListResponse>> getCoalitions({
+  Future<DataState<CampusCoalitionListResponse>> getCoalitions({
     required String id,
   });
 
   Future<DataState<EventListResponse>> getParisFutureEvents();
+
+  Future<DataState<UserCoalitionListResponse>> getUserCoalitions({
+    required String id,
+  });
 
 }

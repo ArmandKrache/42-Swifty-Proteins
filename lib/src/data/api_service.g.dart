@@ -136,14 +136,14 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<HttpResponse<CoalitionListResponse>> getCoalitions(
+  Future<HttpResponse<CampusCoalitionListResponse>> getCoalitions(
       {required String id}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<HttpResponse<CoalitionListResponse>>(Options(
+        _setStreamType<HttpResponse<CampusCoalitionListResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -159,7 +159,7 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = CoalitionListResponse.fromMap(_result.data!);
+    final value = CampusCoalitionListResponse.fromMap(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }
@@ -188,6 +188,35 @@ class _ApiService implements ApiService {
               baseUrl,
             ))));
     final value = EventListResponse.fromMap(_result.data!);
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
+  }
+
+  @override
+  Future<HttpResponse<UserCoalitionListResponse>> getUserCoalitions(
+      {required String id}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<HttpResponse<UserCoalitionListResponse>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'v2/coalitions?user_id=${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = UserCoalitionListResponse.fromMap(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

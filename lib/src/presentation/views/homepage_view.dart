@@ -1,7 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:oktoast/oktoast.dart';
-import 'package:swifty_companion/src/config/app_assets.dart';
 import 'package:swifty_companion/src/config/app_colors.dart';
 import 'package:swifty_companion/src/config/router/app_router.dart';
 import 'package:swifty_companion/src/domain/models/coalition/coalition.dart';
@@ -11,8 +8,6 @@ import 'package:swifty_companion/src/presentation/cubits/remote_articles/homepag
 import 'package:swifty_companion/src/presentation/widgets/coalition_banner.dart';
 import 'package:swifty_companion/src/presentation/widgets/event_card.dart';
 import 'package:swifty_companion/src/presentation/widgets/search_bar_widget.dart';
-import 'package:swifty_companion/src/utils/constants.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

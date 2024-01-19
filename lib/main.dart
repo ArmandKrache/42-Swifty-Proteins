@@ -5,7 +5,6 @@ import 'package:swifty_companion/src/locator.dart';
 import 'package:swifty_companion/src/presentation/cubits/login/login_cubit.dart';
 import 'package:swifty_companion/src/presentation/cubits/remote_articles/homepage_cubit.dart';
 import 'package:swifty_companion/src/presentation/cubits/student/student_cubit.dart';
-import 'package:swifty_companion/src/utils/constants.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,7 +44,7 @@ class MyApp extends StatelessWidget {
       child: OKToast(child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         routerConfig: appRouter.config(),
-        title: appTitle,
+        title: 'Swifty Companion',
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
         locale: context.locale,

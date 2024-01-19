@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:swifty_companion/src/config/config.dart';
 import 'package:swifty_companion/src/config/router/app_router.dart';
+import 'package:swifty_companion/src/domain/models/coalition/coalition.dart';
 import 'package:swifty_companion/src/domain/models/login_request.dart';
 import 'package:swifty_companion/src/domain/models/student/student.dart';
 import 'package:swifty_companion/src/domain/models/student/student_details.dart';
@@ -29,6 +30,15 @@ class StudentCubit extends BaseCubit<StudentState, StudentDetails?> {
 
     if (response is DataSuccess) {
       final student = response.data!;
+
+      final userCoalitionResponse = await _apiRepository.getUserCoalitions(id: id);
+      if (userCoalitionResponse is DataSuccess) {
+        Coalition? userCoalition = userCoalitionResponse.data?.coalitions.singleWhere((element) => element.slug.startsWith("42cursus-paris"),
+            orElse: () => const Coalition(coalition: CoalitionType.order));
+        if (userCoalition != null) {
+          student.coalition = userCoalition;
+        }
+      }
 
       emit(StudentSuccess(student: student));
     } else if (response is DataFailed) {

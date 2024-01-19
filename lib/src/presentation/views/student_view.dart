@@ -15,6 +15,7 @@ import 'package:swifty_companion/src/domain/models/project.dart';
 import 'package:swifty_companion/src/domain/models/student/student_details.dart';
 import 'package:swifty_companion/src/presentation/cubits/student/student_cubit.dart';
 import 'package:swifty_companion/src/presentation/widgets/coalition_banner.dart';
+import 'package:swifty_companion/src/utils/coalition_functions.dart';
 
 @RoutePage()
 class StudentView extends HookWidget {
@@ -56,7 +57,8 @@ class StudentView extends HookWidget {
     );
   }
 
-  Widget _buildUserDetailsBody(BuildContext context, StudentDetails student, CoalitionType coalition) {
+  Widget _buildUserDetailsBody(BuildContext context, StudentDetails student, CoalitionType coalition2) {
+    CoalitionType coalition = student.coalition.coalition;
     return SingleChildScrollView(
       child: Stack(
         children: [
@@ -65,13 +67,13 @@ class StudentView extends HookWidget {
               SizedBox(
                 width: double.maxFinite,
                 height: 98 + MediaQuery.of(context).padding.top,
-                child: Image.asset(AppAssets.getCoalitionBackground(coalition), fit: BoxFit.cover,),
+                child: Image.asset(getCoalitionBackground(coalition), fit: BoxFit.cover,),
               ),
               Transform.translate(
                 offset: const Offset(0, -5),
                 child: LinearPercentIndicator(
                   lineHeight: 10,
-                  progressColor: AppColors.order,
+                  progressColor: getCoalitionColor(student.coalition.coalition),
                   backgroundColor: Colors.transparent,
                   percent: student.cursus.level - student.cursus.level.toInt(),
                   padding: EdgeInsets.zero,
@@ -132,7 +134,7 @@ class StudentView extends HookWidget {
                   ),
                   const SizedBox(height: 8,),
                   Center(
-                    child: Text("${student.location}",
+                    child: Text(student.location,
                       style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
                     ),
                   ),
@@ -145,7 +147,7 @@ class StudentView extends HookWidget {
                         width: 64,
                         child: Column(
                           children: [
-                            Text("${student.wallet}", style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                            Text("${student.wallet}", style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
                             const SizedBox(height: 4,),
                             const Text("Wallet", style: TextStyle(color: Colors.black87, fontSize: 12),)
                           ],
@@ -153,22 +155,22 @@ class StudentView extends HookWidget {
                       ),
                       Column(
                         children: [
-                          const CoalitionBannerWidget(
-                            coalition: Coalition(coalition: CoalitionType.order,),
+                          CoalitionBannerWidget(
+                            coalition: student.coalition,
                             titleVisibility: false,
                             scoreVisibility: false,
                             width: 40,
                             height: 56,
                           ),
                           const SizedBox(height: 4,),
-                          Text(AppAssets.getCoalitionTitle(coalition), style: const TextStyle(color: AppColors.order, fontSize: 12, fontWeight: FontWeight.bold,),)
+                          Text(getCoalitionTitle(coalition), style: TextStyle(color: getCoalitionColor(student.coalition.coalition), fontSize: 12, fontWeight: FontWeight.bold,),)
                         ],
                       ),
                       SizedBox(
                         width: 64,
                         child: Column(
                           children: [
-                            Text("${student.correctionPoints}", style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                            Text("${student.correctionPoints}", style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
                             const SizedBox(height: 4,),
                             const Text("Evaluation points",
                               style: TextStyle(color: Colors.black87, fontSize: 12),
@@ -180,9 +182,9 @@ class StudentView extends HookWidget {
                     ],
                   ),
                   _buildProjectsWidget(student),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 24),
                   _buildSkillsWidget(student),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 24),
                   ..._buildContactWidgets(student),
                 ],
               ),
@@ -210,7 +212,7 @@ class StudentView extends HookWidget {
 
   Widget _buildProjectsWidget(StudentDetails student) {
 
-    List<Project> projects = student.projects.where((element) => element.cursusId == 21).toList();
+    List<Project> projects = student.projects.where((element) => (element.cursusId == 21)).toList();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -228,7 +230,7 @@ class StudentView extends HookWidget {
                   width: 192,
                   height: 192,
                   decoration: BoxDecoration(
-                    color: AppColors.primary.withOpacity(0.1),
+                    color: AppColors.getProjectColor(projects[i].status).withOpacity(0.1),
                     borderRadius: BorderRadius.circular(4)
                   ),
                   child: Column(
@@ -239,11 +241,11 @@ class StudentView extends HookWidget {
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Center(child: Text(projects[i].mark.toString(),
-                        style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold, fontSize: 24),
+                        style: TextStyle(color: AppColors.getProjectColor(projects[i].status), fontWeight: FontWeight.bold, fontSize: 32),
                       )),
                       Align(
                         alignment: Alignment.centerRight,
-                          child: Text(projects[i].status, style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold),)
+                          child: Text(projects[i].status, style: TextStyle(color: AppColors.getProjectColor(projects[i].status), fontWeight: FontWeight.bold),)
                       )
                     ],
                   ),
@@ -305,9 +307,9 @@ class StudentView extends HookWidget {
                 titlePositionPercentageOffset: 0.2,
                 titleTextStyle: const TextStyle(fontSize: 10),
                 getTitle: (index, angle) {
-                  return RadarChartTitle(text: student.cursus.skills[index].name,);
+                  return RadarChartTitle(text: "${student.cursus.skills[index].name}\n${student.cursus.skills[index].level.toStringAsPrecision(2)}",);
                 },
-                tickCount: 1,
+                tickCount: 5,
                 ticksTextStyle:
                 const TextStyle(color: Colors.transparent, fontSize: 10),
                 tickBorderData: const BorderSide(color: Colors.transparent),
