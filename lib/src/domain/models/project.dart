@@ -21,7 +21,7 @@ class Project extends Equatable {
   factory Project.fromMap(Map<String, dynamic> map) {
     return Project(
       id: map['id'] ?? -1,
-      mark: map['final_mark'] ?? "",
+      mark: map['final_mark'] ?? 0,
       status: map['status'] ?? "",
       projectId: map['projectId'] ?? -1,
       name: map["project"]['name'] ?? "",

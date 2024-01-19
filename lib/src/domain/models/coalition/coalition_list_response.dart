@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:swifty_companion/src/config/config.dart';
 import 'package:swifty_companion/src/domain/models/coalition/coalition.dart';
 
 class CoalitionListResponse extends Equatable {
@@ -10,13 +11,25 @@ class CoalitionListResponse extends Equatable {
   });
 
 
-  factory CoalitionListResponse.fromMap(List<Map<String, dynamic>> items) {
+  factory CoalitionListResponse.fromMap(List<dynamic> items) {
+    //logger.d(items);
+    Map<String, dynamic> campus = items.first;
     return CoalitionListResponse(
-      coalitions: List<Coalition>.from((items).map<dynamic>((element) {
+      coalitions: List<Coalition>.from((campus["coalitions"]).map<dynamic>((element) {
+        return Coalition.fromMap(element);
+      }))..sort((a, b) => b.score - a.score),
+    );
+  }
+
+  /*
+  factory CoalitionListResponse.fromMap(Map<String, dynamic> items) {
+    logger.d(items);
+    return CoalitionListResponse(
+      coalitions: List<Coalition>.from((items as List).map<dynamic>((element) {
         return Coalition.fromMap(element);
       })),
     );
-  }
+  }*/
 
   @override
   bool get stringify => true;

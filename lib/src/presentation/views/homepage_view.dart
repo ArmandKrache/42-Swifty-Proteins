@@ -1,9 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:swifty_companion/src/config/app_assets.dart';
 import 'package:swifty_companion/src/config/app_colors.dart';
 import 'package:swifty_companion/src/config/router/app_router.dart';
 import 'package:swifty_companion/src/domain/models/coalition/coalition.dart';
+import 'package:swifty_companion/src/domain/models/event/event.dart';
+import 'package:swifty_companion/src/domain/models/student/student.dart';
 import 'package:swifty_companion/src/presentation/cubits/remote_articles/homepage_cubit.dart';
 import 'package:swifty_companion/src/presentation/widgets/coalition_banner.dart';
 import 'package:swifty_companion/src/presentation/widgets/event_card.dart';
@@ -25,22 +28,22 @@ class HomepageView extends HookWidget {
     final TextEditingController searchController = TextEditingController();
 
     useEffect(() {
-
+      homepageCubit.fetchData();
+      return;
     }, const []);
 
     return Scaffold(
       body: BlocBuilder<HomepageCubit, HomepageState>(
         builder: (_, state) {
-          switch (state.runtimeType) {
-            case HomepageLoading:
+            if (state.runtimeType == HomepageLoading) {
               return const Center(child: CupertinoActivityIndicator());
-            case HomepageFailed:
+            }
+            else if (state.runtimeType == HomepageFailed) {
               return const Center(child: Icon(Icons.refresh));
-            case HomepageSuccess:
+            }
+            else {
               return _buildBody(homepageCubit, searchController);
-            default:
-              return const SizedBox();
-          }
+            }
         }
       )
     );
@@ -56,9 +59,9 @@ class HomepageView extends HookWidget {
           children: [
             _buildStudentSearchWidget(homepageCubit, searchController),
             const SizedBox(height: 16,),
-            _buildAgendaWidget(),
+            _buildEventsWidget(homepageCubit),
             const SizedBox(height: 16,),
-            _buildCoalitionsWidget(),
+            _buildCoalitionsWidget(homepageCubit),
             const SizedBox(height: 24,),
             GestureDetector(
               onTap: () {
@@ -75,6 +78,8 @@ class HomepageView extends HookWidget {
   }
 
   Widget _buildStudentSearchWidget(HomepageCubit homepageCubit, TextEditingController searchController) {
+    List<Student> students = homepageCubit.state.students ?? [];
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
       child: Column(
@@ -84,7 +89,8 @@ class HomepageView extends HookWidget {
           CustomSearchBar(
             controller: searchController,
             onChanged: (query) async {
-              /// Search student
+              ///TODO: uncomment -  if (query != "")
+              homepageCubit.searchStudent(query: query);
             },
             margin: const EdgeInsets.all(8),
             width: double.maxFinite,
@@ -92,43 +98,52 @@ class HomepageView extends HookWidget {
           const SizedBox(height: 4,),
           BlocBuilder<HomepageCubit, HomepageState>(
               builder: (context, state) {
-                /*
-                if (state.student) {
-                  return const Center(child: Text("Drinks list is empty"),);
-                } else {
-                  return _buildDataWidgets(state.drinks, homepageCubit, () {rebuildFlag.value = true;});
-                }*/
-                /// If student found
+                if (state.runtimeType == HomepageSearchLoading) {
+                  return const Center(child: CupertinoActivityIndicator());
+                }
+                if (students.isEmpty && searchController.text != "") {
+                  return Center(child: Text("0 results for the given query: ${searchController.text}"),);
+                }
                 return Center(
-                  child: GestureDetector(
-                    onTap: () {
-                      /// Handle Navigation to Student view
-                      appRouter.push(const StudentRoute());
-                    },
-                    child: Column(
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
                       children: [
-                        Image.network("https://cdn.intra.42.fr/users/0a2d11f83d8ac572eedab592adcaa3f8/akrache.jpg", width: 128,),
-                        const SizedBox(height: 2,),
-                        const Text("akrache",
-                          style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.primary, fontSize: 15),
-                        )
+                        for (int i = 0; i < students.length; i++)
+                          Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 4),
+                            child: GestureDetector(
+                            onTap: () {
+                              appRouter.push(const StudentRoute());
+                            },
+                            child: Column(
+                              children: [
+                                ///TODO : Safe Network assets
+                                Image.network(students[i].picture, width: 128,),
+                                const SizedBox(height: 2,),
+                                Text(students[i].login,
+                                  style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.primary, fontSize: 15),
+                                )
+                              ],
+                            ),
+                            ),
+                          ),
                       ],
                     ),
                   ),
                 );
-
-                /// Else If no results AND query is not empty
-                return const Center(child: Text("0 results matched for [query]"),);
-                /// Else
-                return const SizedBox();
               }),
         ],
       ),
     );
   }
 
-  Widget _buildCoalitionsWidget() {
-    return const Padding(
+  Widget _buildCoalitionsWidget(HomepageCubit homepageCubit) {
+    List<Coalition>? coalitions = homepageCubit.state.coalitions;
+    if (coalitions == null) {
+      return const SizedBox();
+    }
+    return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -142,10 +157,11 @@ class HomepageView extends HookWidget {
               runSpacing: 8,
               spacing: 8,
               children: [
-                CoalitionBannerWidget(coalition: Coalition(id: 0, name: "Order", score: 7777, coalition: CoalitionType.order), width: 72,),
-                CoalitionBannerWidget(coalition: Coalition(id: 0, name: "Alliance", score: 88812, coalition: CoalitionType.alliance), width: 72,),
-                CoalitionBannerWidget(coalition: Coalition(id: 0, name: "Assembly", score: 4242, coalition: CoalitionType.assembly), width: 72,),
-                CoalitionBannerWidget(coalition: Coalition(id: 0, name: "Federation", score: 667, coalition: CoalitionType.federation), width: 72,),
+                for (int i = 0; i < coalitions.length; i++)
+                  CoalitionBannerWidget(
+                    coalition: coalitions[i],
+                    width: 72,
+                  ),
               ],
             ),
           )
@@ -155,22 +171,26 @@ class HomepageView extends HookWidget {
     );
   }
 
-  Widget _buildAgendaWidget() {
+  Widget _buildEventsWidget(HomepageCubit homepageCubit) {
+    List<Event>? events = homepageCubit.state.events;
+    if (events == null) {
+      return const SizedBox();
+    }
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text("Agenda", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+          const Text("Events", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
           const SizedBox(height: 4,),
           SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: SizedBox(
               height: 298,
               child: ListView.builder(
-                itemCount: 10, // Adjust this based on your actual item count
+                itemCount: events.length, // Adjust this based on your actual item count
                 itemBuilder: (context, index) {
-                  return const EventCardWidget();
+                  return EventCardWidget(event: events[index]);
                 },
               ),
             ),

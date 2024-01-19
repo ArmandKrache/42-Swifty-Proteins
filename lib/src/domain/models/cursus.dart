@@ -1,11 +1,13 @@
 import 'package:equatable/equatable.dart';
 
 class Cursus extends Equatable {
-  final int level;
+  final int id;
+  final double level;
   final String grade;
   final List<Skill> skills;
 
   const Cursus({
+    required this.id,
     required this.level,
     required this.grade,
     required this.skills,
@@ -14,9 +16,12 @@ class Cursus extends Equatable {
 
   factory Cursus.fromMap(Map<String, dynamic> map) {
     return Cursus(
-      level: map['level'] ?? -1,
+      id: map['cursus_id'] ?? -1,
+      level: map['level'] ?? 0.0,
       grade: map['grade'] ?? "",
-      skills: map['login'] ?? "",
+      skills: List<Skill>.from((map['skills'] ?? []).map<dynamic>((element) {
+        return Skill.fromMap(element);
+      })),
     );
   }
 
@@ -24,7 +29,7 @@ class Cursus extends Equatable {
   bool get stringify => true;
 
   @override
-  List<Object?> get props => [grade, level];
+  List<Object?> get props => [id, grade, level];
 
 }
 

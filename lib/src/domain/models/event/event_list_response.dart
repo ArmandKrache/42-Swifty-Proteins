@@ -11,7 +11,7 @@ class EventListResponse extends Equatable {
   });
 
 
-  factory EventListResponse.fromMap(List<Map<String, dynamic>> items) {
+  factory EventListResponse.fromMap(List<dynamic> items) {
     return EventListResponse(
       events: List<Event>.from((items).map<dynamic>((element) {
         return Event.fromMap(element);
