@@ -1,4 +1,5 @@
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:swifty_companion/src/config/app_assets.dart';
@@ -13,9 +14,9 @@ String _formatDateAndStartingHour(DateTime start) {
 String _formatDeltaBetweenStartAndEnd(DateTime start, DateTime end) {
   Duration delta = end.difference(start);
   if (delta.inHours < 2) {
-    return "${delta.inMinutes} minutes";
+    return "${delta.inMinutes} ${tr("utils.minutes")}";
   }
-  return "${delta.inHours} hours";
+  return "${delta.inHours} ${delta.inHours <= 1 ? tr("utils.hour") : tr("utils.hours")}";
 }
 
 class EventCardWidget extends StatelessWidget {
@@ -56,8 +57,8 @@ class EventCardWidget extends StatelessWidget {
         children: [
           RichText(text: TextSpan(
             children: [
-              TextSpan(text: "${event.kind} - ", style: TextStyle(fontWeight: FontWeight.bold, color: borderColor),),
-              TextSpan(text: event.name, style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black87),),
+              TextSpan(text: "${tr("events.${event.kind}")}", style: TextStyle(fontWeight: FontWeight.bold, color: borderColor),),
+              TextSpan(text:  " - ${event.name}", style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black87),),
             ],
           ),
           ),

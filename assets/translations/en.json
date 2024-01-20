@@ -1,12 +1,45 @@
 {
-  "breaking_news" : {
-    "daily_news" : "Daily News"
+  "app_name" : "Swifty companion",
+  "app_name_caps" : "SWIFTY COMPANION",
+  "log_in" : "Log in",
+  "homepage" : {
+    "logout" : "Logout",
+    "search_student_by_login" : "Search students by login",
+    "events" : "Events"
   },
-  "saved_articles" : {
-    "saved_articles" : "Saved Articles",
-    "no_saved_articles_disclaimer" : "No saved articles yet"
+  "student" : {
+    "wallet" : "Wallet",
+    "evaluation_points" : "Evaluation points",
+    "projects" : "Projects",
+    "contact" : "Contact",
+    "skills" : "Skills",
+    "email" : "Email",
+    "phone" : "Phone",
+    "level" : "Level"
   },
-  "article_details" : {
-    "article_saved_confirm" : "Article Saved Successfully"
+  "coalitions" : {
+    "coalitions" : "Coalitions",
+    "order" : "Order",
+    "federation" : "Federation",
+    "alliance" : "Alliance",
+    "assembly" : "Assembly",
+    "score" : "Score"
+  },
+  "errors" : {
+    "0_results_for_given_query" : "0 results for the given query",
+    "student_not_loaded" : "Student couldn't be loaded",
+    "no_data_found" : "No Data found"
+  },
+  "events" : {
+    "association" : "Association",
+    "event" : "Event",
+    "extern" : "Extern",
+    "partnership" : "Partnership"
+  },
+  "utils" : {
+    "Search" : "Search",
+    "minutes" : "minutes",
+    "hour" : "hour",
+    "hours" : "hours"
   }
 }

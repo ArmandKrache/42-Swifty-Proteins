@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -40,9 +41,9 @@ class StudentView extends HookWidget {
         child: BlocBuilder<StudentCubit, StudentState>(
             builder: (context, state) {
               if (state.runtimeType == StudentFailed) {
-                return const Center(
+                return Center(
                   heightFactor: 50,
-                  child: Text("Student couldn't be loaded"),
+                  child: Text(tr("errors.student_not_loaded")),
                 );
               } else if (state.runtimeType == StudentLoading && state.student == null) {
                 return const Center(
@@ -93,7 +94,7 @@ class StudentView extends HookWidget {
           ),
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -149,7 +150,7 @@ class StudentView extends HookWidget {
                           children: [
                             Text("${student.wallet}", style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
                             const SizedBox(height: 4,),
-                            const Text("Wallet", style: TextStyle(color: Colors.black87, fontSize: 12),)
+                            Text(tr("student.wallet"), style: const TextStyle(color: Colors.black87, fontSize: 12),)
                           ],
                         ),
                       ),
@@ -172,8 +173,8 @@ class StudentView extends HookWidget {
                           children: [
                             Text("${student.correctionPoints}", style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
                             const SizedBox(height: 4,),
-                            const Text("Evaluation points",
-                              style: TextStyle(color: Colors.black87, fontSize: 12),
+                            Text(tr("student.evaluation_points"),
+                              style: const TextStyle(color: Colors.black87, fontSize: 12),
                               textAlign: TextAlign.center,
                             )
                           ],
@@ -217,7 +218,7 @@ class StudentView extends HookWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text("Projects", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+        Text(tr("student.projects"), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
         const SizedBox(height: 8,),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
@@ -230,7 +231,7 @@ class StudentView extends HookWidget {
                   width: 192,
                   height: 192,
                   decoration: BoxDecoration(
-                    color: AppColors.getProjectColor(projects[i].status).withOpacity(0.1),
+                    color: getProjectColor(projects[i].status).withOpacity(0.1),
                     borderRadius: BorderRadius.circular(4)
                   ),
                   child: Column(
@@ -241,11 +242,11 @@ class StudentView extends HookWidget {
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Center(child: Text(projects[i].mark.toString(),
-                        style: TextStyle(color: AppColors.getProjectColor(projects[i].status), fontWeight: FontWeight.bold, fontSize: 32),
+                        style: TextStyle(color: getProjectColor(projects[i].status), fontWeight: FontWeight.bold, fontSize: 32),
                       )),
                       Align(
                         alignment: Alignment.centerRight,
-                          child: Text(projects[i].status, style: TextStyle(color: AppColors.getProjectColor(projects[i].status), fontWeight: FontWeight.bold),)
+                          child: Text(projects[i].status, style: TextStyle(color: getProjectColor(projects[i].status), fontWeight: FontWeight.bold),)
                       )
                     ],
                   ),
@@ -292,9 +293,9 @@ class StudentView extends HookWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text("Skills", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+        Text(tr("student.skills"), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
         const SizedBox(height: 4,),
-        noData ? const Center(child: Text("No Data found", style: TextStyle(color: Colors.grey),),)  :
+        noData ? Center(child: Text(tr("errors.no_data_found"), style: const TextStyle(color: Colors.grey),),)  :
         Center(
           child: AspectRatio(
             aspectRatio: 1.3,
@@ -325,7 +326,7 @@ class StudentView extends HookWidget {
 
   List<Widget> _buildContactWidgets(StudentDetails student) {
     return [
-      const Text("Contact", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+      Text(tr("student.contact"), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
       const SizedBox(height: 4,),
       Card(
         elevation: 0,
@@ -337,7 +338,7 @@ class StudentView extends HookWidget {
                   text: "",
                   style: const TextStyle(color: Colors.black),
                   children: [
-                    const TextSpan(text: "Phone", style: TextStyle(decoration: TextDecoration.underline)),
+                    TextSpan(text: tr("student.phone"), style: const TextStyle(decoration: TextDecoration.underline)),
                     TextSpan(text: ": ${student.phone}"),
                   ],
                 )),
@@ -347,7 +348,7 @@ class StudentView extends HookWidget {
                   text: "",
                   style: const TextStyle(color: Colors.black),
                   children: [
-                    const TextSpan(text: "Email", style: TextStyle(decoration: TextDecoration.underline)),
+                    TextSpan(text: tr("student.email"), style: const TextStyle(decoration: TextDecoration.underline)),
                     TextSpan(text: ": ${student.email }"),
                   ],
                 )),
@@ -361,5 +362,5 @@ class StudentView extends HookWidget {
 String _formatLevelAndXp(double total) {
   int level = total.toInt();
   int xp = ((total - level) * 100).round();
-  return "Level $level - $xp%";
+  return "${tr("student.level")} $level - $xp%";
 }

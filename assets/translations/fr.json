@@ -1,12 +1,45 @@
 {
-  "breaking_news" : {
-    "daily_news" : "Nouvelles du jour"
+  "app_name" : "Swifty companion",
+  "app_name_caps" : "SWIFTY COMPANION",
+  "log_in" : "Se connecter",
+  "homepage" : {
+    "logout" : "Se déconnecter",
+    "search_student_by_login" : "Rechercher par login",
+    "events" : "Événements"
   },
-  "saved_articles" : {
-    "saved_articles" : "Articles enregistrés",
-    "no_saved_articles_disclaimer" : "Aucun article enregistré"
+  "student" : {
+    "wallet" : "Wallet",
+    "evaluation_points" : "Points de correction",
+    "projects" : "Projets",
+    "contact" : "Contact",
+    "skills" : "Compétences",
+    "email" : "Email",
+    "phone" : "Phone",
+    "level" : "Niveau"
   },
-  "article_details" : {
-    "article_saved_confirm" : "Article enregistré avec succès"
+  "coalitions" : {
+    "coalitions" : "Coalitions",
+    "order" : "Order",
+    "federation" : "Federation",
+    "alliance" : "Alliance",
+    "assembly" : "Assembly",
+    "score" : "Score"
+  },
+  "errors" : {
+    "0_results_for_given_query" : "0 résultats pour la requête",
+    "student_not_loaded" : "Le chargement des données de l'étudiant à échoué.",
+    "no_data_found" : "Aucune donnée trouvée"
+  },
+  "events" : {
+    "association" : "Association",
+    "event" : "Événement",
+    "extern" : "Externe",
+    "partnership" : "Partenariat"
+  },
+  "utils" : {
+    "Search" : "Rechercher",
+    "minutes" : "minutes",
+    "hour" : "heure",
+    "hours" : "heures"
   }
 }

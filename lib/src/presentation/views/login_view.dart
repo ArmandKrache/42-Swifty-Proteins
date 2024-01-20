@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:swifty_companion/.secret.dart';
@@ -55,8 +56,8 @@ class LoginView extends HookWidget {
                 const Expanded(child: SizedBox()),
                 SvgPicture.asset(AppAssets.white42LogoSVG, width: 192,),
                 const SizedBox(height: 8,),
-                const Text("SWIFTY COMPANION",
-                  style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
+                Text(tr("app_name_caps"),
+                  style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
                 ),
                 const Expanded(flex: 3, child: SizedBox()),
                 TextButton(
@@ -70,8 +71,8 @@ class LoginView extends HookWidget {
                   },
                   child: Container(
                       padding: const EdgeInsets.all(8),
-                      child: const Text("Log in",
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                      child: Text(tr("log_in"),
+                        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
                       ),
                   ),
                 ),

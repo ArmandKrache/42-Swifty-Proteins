@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:swifty_companion/src/config/app_colors.dart';
 import 'package:swifty_companion/src/config/router/app_router.dart';
 import 'package:swifty_companion/src/domain/models/coalition/coalition.dart';
@@ -28,6 +29,20 @@ class HomepageView extends HookWidget {
     }, const []);
 
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: CustomSearchBar(
+          controller: searchController,
+          onChanged: (query) async {
+            if (query != "") {
+              homepageCubit.searchStudent(query: query);
+            }
+          },
+          margin: const EdgeInsets.all(8),
+          width: double.maxFinite,
+          hintText: tr("homepage.search_student_by_login"),
+        ),toolbarHeight: 80,
+      ),
       body: BlocBuilder<HomepageCubit, HomepageState>(
         builder: (_, state) {
             if (state.runtimeType == HomepageLoading) {
@@ -62,8 +77,8 @@ class HomepageView extends HookWidget {
               onTap: () {
                 homepageCubit.logOut();
               },
-              child: const Center(child: Text("Logout",
-                style: TextStyle(color: AppColors.alert, fontWeight: FontWeight.bold, fontSize: 16  ),)
+              child: Center(child: Text(tr("homepage.logout"),
+                style: const TextStyle(color: AppColors.alert, fontWeight: FontWeight.bold, fontSize: 16  ),)
               ),
             )
           ],
@@ -80,17 +95,6 @@ class HomepageView extends HookWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text("Search students by login", style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),),
-          CustomSearchBar(
-            controller: searchController,
-            onChanged: (query) async {
-              if (query != "") {
-                homepageCubit.searchStudent(query: query);
-              }
-            },
-            margin: const EdgeInsets.all(8),
-            width: double.maxFinite,
-          ),
           const SizedBox(height: 4,),
           BlocBuilder<HomepageCubit, HomepageState>(
               builder: (context, state) {
@@ -98,7 +102,11 @@ class HomepageView extends HookWidget {
                   return const Center(child: CupertinoActivityIndicator());
                 }
                 if (students.isEmpty && searchController.text != "") {
-                  return Center(child: Text("0 results for the given query: ${searchController.text}"),);
+                  return Center(
+                    child: Text("${tr("errors.0_results_for_given_query")}: ${searchController.text}",
+                      style: const TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
+                    ),
+                  );
                 }
                 return Center(
                   child: SingleChildScrollView(
@@ -149,12 +157,12 @@ class HomepageView extends HookWidget {
       return const SizedBox();
     }
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Coalitions", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-          SizedBox(height: 8,),
+          Text(tr("coalitions.coalitions"), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+          const SizedBox(height: 8,),
           Center(
             child: Wrap(
               runAlignment: WrapAlignment.center,
@@ -186,7 +194,7 @@ class HomepageView extends HookWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text("Events", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
+          Text(tr("homepage.events"), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
           const SizedBox(height: 4,),
           SingleChildScrollView(
             scrollDirection: Axis.vertical,

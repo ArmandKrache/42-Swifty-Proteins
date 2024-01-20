@@ -1,4 +1,5 @@
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:swifty_companion/src/config/app_assets.dart';
@@ -50,8 +51,8 @@ class CoalitionBannerWidget extends StatelessWidget {
           const SizedBox(height: 8,),
           Visibility(
             visible: scoreVisibility,
-            child: const Text("Score",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+            child: Text(tr("coalitions.score"),
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
             ),
           ),
           Visibility(

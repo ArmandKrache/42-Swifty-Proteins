@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:swifty_companion/src/utils/resources/debouncer.dart';
 
@@ -37,6 +38,9 @@ class CustomSearchBar extends StatelessWidget {
           });
         },
         leading: const Icon(Icons.search),
+        elevation: MaterialStateProperty.all(1),
+        surfaceTintColor: MaterialStateProperty.all(Colors.white),
+        shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(4))),
       ),
     );
   }

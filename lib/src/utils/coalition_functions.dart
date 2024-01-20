@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:swifty_companion/src/config/app_assets.dart';
 import 'package:swifty_companion/src/config/app_colors.dart';
@@ -58,12 +59,12 @@ String getCoalitionBackground(CoalitionType coalition) {
 String getCoalitionTitle(CoalitionType coalition) {
   switch (coalition) {
     case CoalitionType.order:
-      return "Order";
+      return tr("coalitions.order");
     case CoalitionType.alliance:
-      return "Alliance";
+      return tr("coalitions.alliance");
     case CoalitionType.assembly:
-      return "Assembly";
+      return tr("coalitions.assembly");
     case CoalitionType.federation:
-      return "Federation";
+      return tr("coalitions.federation");
   }
 }
