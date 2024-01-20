@@ -37,14 +37,14 @@ class HomepageCubit extends BaseCubit<HomepageState, List<String>> {
   }
 
   Future<void> searchStudent({required String query}) async {
-    if (isBusy) return;
+    if (isBusy || query == "") return;
 
     await run(() async {
       emit(HomepageSearchLoading(coalitions: coalitions, events: events, students: students));
       final response = await _apiRepository.getStudentByLogin(login: query);
 
       if (response is DataSuccess) {
-        logger.d(response.data);
+        //logger.d(response.data);
         students = response.data!.students;
         emit(HomepageSuccess(coalitions: coalitions, events: events, students: students));
       } else if (response is DataFailed) {

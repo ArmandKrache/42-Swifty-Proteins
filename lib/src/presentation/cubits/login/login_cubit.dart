@@ -47,6 +47,7 @@ class LoginCubit extends BaseCubit<LoginState, Map<String, dynamic>> {
 
       if (expiresIn > 0) {
         appRouter.push(const HomepageRoute());
+        emit(const LoginSuccess());
       } else {
         emit(const LoginSuccess());
       }

@@ -38,9 +38,12 @@ class CustomSearchBar extends StatelessWidget {
           });
         },
         leading: const Icon(Icons.search),
-        elevation: MaterialStateProperty.all(1),
+        elevation: MaterialStateProperty.all(0),
         surfaceTintColor: MaterialStateProperty.all(Colors.white),
-        shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(4))),
+        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(4),
+          side: BorderSide(color: Colors.grey)
+        )),
       ),
     );
   }

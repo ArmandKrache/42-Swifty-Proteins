@@ -8,6 +8,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:swifty_companion/src/config/app_assets.dart';
 import 'package:swifty_companion/src/config/app_colors.dart';
+import 'package:swifty_companion/src/config/app_strings.dart';
 import 'package:swifty_companion/src/config/config.dart';
 import 'package:swifty_companion/src/config/router/app_router.dart';
 import 'package:swifty_companion/src/domain/models/coalition/coalition.dart';
@@ -86,10 +87,33 @@ class StudentView extends HookWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text(_formatLevelAndXp(student.cursus.level), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Colors.white),),
+                    Text(_formatLevelAndXp(student.cursus.level),
+                      style: const TextStyle(fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                          color: Colors.white
+                      ),
+                    ),
+                    const SizedBox(width: 4,)
                   ],
                 ),
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
+                    width: 8,
+                    height: 8,
+                    decoration: BoxDecoration(
+                      color: student.location == "" ? AppColors.alert : AppColors.valid,
+                      borderRadius: BorderRadius.circular(8)
+                    ),
+                  ),
+                  const SizedBox(width: 4,),
+                  Text(student.location != "" ? student.location : tr("student.unavailable"),
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),),
+                  const SizedBox(width: 8,)
+                ],
+              )
             ],
           ),
           SafeArea(
@@ -131,12 +155,6 @@ class StudentView extends HookWidget {
                   Center(
                     child: Text("(${student.login})",
                       style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.grey),
-                    ),
-                  ),
-                  const SizedBox(height: 8,),
-                  Center(
-                    child: Text(student.location,
-                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -200,7 +218,7 @@ class StudentView extends HookWidget {
                   },
                   child: const Padding(
                     padding: EdgeInsets.only(left: 16),
-                      child: Icon(Icons.clear, size: 28, color: Colors.white,)
+                      child: Icon(Icons.arrow_back_ios, size: 24, color: Colors.white,)
                   )
                 )
               ],
@@ -225,36 +243,44 @@ class StudentView extends HookWidget {
           child: Row(
             children: [
               for (int i = 0; i < projects.length; i++)
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 2),
-                  padding: const EdgeInsets.all(2),
-                  width: 192,
-                  height: 192,
-                  decoration: BoxDecoration(
-                    color: getProjectColor(projects[i].status).withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(4)
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(projects[i].name,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      Center(child: Text(projects[i].mark.toString(),
-                        style: TextStyle(color: getProjectColor(projects[i].status), fontWeight: FontWeight.bold, fontSize: 32),
-                      )),
-                      Align(
-                        alignment: Alignment.centerRight,
-                          child: Text(projects[i].status, style: TextStyle(color: getProjectColor(projects[i].status), fontWeight: FontWeight.bold),)
-                      )
-                    ],
-                  ),
-                )
+                _projectCardWidget(projects[i])
             ],
           ),
         ),
       ],
+    );
+  }
+
+  Widget _projectCardWidget(Project project) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 4),
+      padding: const EdgeInsets.all(2),
+      width: 192,
+      height: 128,
+      decoration: BoxDecoration(
+          color: getProjectColor(project.status).withOpacity(0.05),
+          borderRadius: BorderRadius.circular(4)
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(project.name,
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          Center(child: Text(project.mark.toString(),
+            style: TextStyle(color: getProjectColor(project.status), fontWeight: FontWeight.bold, fontSize: 32),
+          )),
+          Align(
+              alignment: Alignment.centerRight,
+              child: Text(AppStrings.getProjectStatus(project.status),
+                style: TextStyle(
+                    color: getProjectColor(project.status),
+                    fontWeight: FontWeight.bold),
+              )
+          )
+        ],
+      ),
     );
   }
 
@@ -270,8 +296,6 @@ class StudentView extends HookWidget {
     List<RadarEntry> skillsEntries = [];
     List<RadarEntry> maxEntries = [];
     for (int i = 0; i < student.cursus.skills.length; i++) {
-      logger.d(student.cursus.skills[i].name);
-      logger.d(student.cursus.skills[i].level);
       skillsEntries.add(RadarEntry(value: student.cursus.skills[i].level));
       maxEntries.add(const RadarEntry(value: 21));
     }
@@ -328,30 +352,31 @@ class StudentView extends HookWidget {
     return [
       Text(tr("student.contact"), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
       const SizedBox(height: 4,),
-      Card(
-        elevation: 0,
+      Container(
+        width: double.maxFinite,
+        padding: EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.grey.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(8)
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            RichText(
-                text: TextSpan(
-                  text: "",
-                  style: const TextStyle(color: Colors.black),
-                  children: [
-                    TextSpan(text: tr("student.phone"), style: const TextStyle(decoration: TextDecoration.underline)),
-                    TextSpan(text: ": ${student.phone}"),
-                  ],
-                )),
-            const SizedBox(height: 2,),
-            RichText(
-                text: TextSpan(
-                  text: "",
-                  style: const TextStyle(color: Colors.black),
-                  children: [
-                    TextSpan(text: tr("student.email"), style: const TextStyle(decoration: TextDecoration.underline)),
-                    TextSpan(text: ": ${student.email }"),
-                  ],
-                )),
+            Row(
+              children: [
+                const Icon(Icons.phone_outlined, color: AppColors.primary,),
+                const SizedBox(width: 8,),
+                Text(student.phone),
+              ],
+            ),
+            const SizedBox(height: 8,),
+            Row(
+              children: [
+                const Icon(Icons.email_outlined, color: AppColors.primary,),
+                const SizedBox(width: 8,),
+                Text(student.email),
+              ],
+            ),
           ],
         ),
       ),

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   static const Color primary = Color(0xff2eb8bb);
-  static const Color alert = Color(0xffbe464c);
+  static const Color alert = Color(0xffE31B1B);
+  static const Color valid = Color(0xff66CC7D);
 
   static const Color order = Color(0xffed7259);
   static const Color alliance = Color(0xff63c185);
@@ -15,10 +16,10 @@ class AppColors {
   static const Color eventPartnership = Color(0xffe57165);
   static const Color eventExtern   = Color(0xffb0a7a7);
 
-  static const Color projectInProgress = Color(0xff63c185);
-  static const Color projectFinished = primary;
+  static const Color projectInProgress = Color(0xffeda451);
+  static const Color projectFinished = valid;
   static const Color projectFailed = alert;
-  static const Color projectSearching = Color(0xffb0a7a7);
+  static const Color projectSearching = primary;
 
 }
 

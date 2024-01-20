@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:swifty_companion/src/config/app_assets.dart';
 import 'package:swifty_companion/src/config/app_colors.dart';
+import 'package:swifty_companion/src/config/app_strings.dart';
 import 'package:swifty_companion/src/config/config.dart';
 import 'package:swifty_companion/src/domain/models/event/event.dart';
 
@@ -44,11 +45,10 @@ class EventCardWidget extends StatelessWidget {
 
 
     return Container(
-      padding: const EdgeInsets.all(4),
+      padding: const EdgeInsets.all(12),
       margin: const EdgeInsets.symmetric(vertical: 4),
       width: double.maxFinite,
       decoration: BoxDecoration(
-        border: Border.all(color: borderColor, width: 2),
         borderRadius: BorderRadius.circular(4),
         color: borderColor.withOpacity(0.1)
       ),
@@ -57,15 +57,17 @@ class EventCardWidget extends StatelessWidget {
         children: [
           RichText(text: TextSpan(
             children: [
-              TextSpan(text: "${tr("events.${event.kind}")}", style: TextStyle(fontWeight: FontWeight.bold, color: borderColor),),
+              TextSpan(text: AppStrings.getEventKind(event.kind), style: TextStyle(fontWeight: FontWeight.bold, color: borderColor),),
               TextSpan(text:  " - ${event.name}", style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black87),),
             ],
           ),
           ),
           const SizedBox(height: 4,),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Icon(Icons.location_on_outlined, size: 16,),
+              const SizedBox(width: 4,),
               Expanded(child: Text(event.location))
             ],
           ),
@@ -73,9 +75,11 @@ class EventCardWidget extends StatelessWidget {
           Row(
             children: [
               const Icon(Icons.calendar_today_outlined, size: 16,),
+              const SizedBox(width: 4,),
               Text(_formatDateAndStartingHour(event.start)),
               const Expanded(child: SizedBox()),
               const Icon(Icons.hourglass_empty_outlined, size: 16,),
+              const SizedBox(width: 4,),
               Text(_formatDeltaBetweenStartAndEnd(event.start, event.end)),
             ],
           ),

@@ -15,15 +15,23 @@
     "skills" : "Skills",
     "email" : "Email",
     "phone" : "Phone",
-    "level" : "Level"
+    "level" : "Level",
+    "unavailable": "Unavailable"
   },
   "coalitions" : {
     "coalitions" : "Coalitions",
-    "order" : "Order",
-    "federation" : "Federation",
-    "alliance" : "Alliance",
-    "assembly" : "Assembly",
+    "order" : "The Order",
+    "federation" : "The Federation",
+    "alliance" : "The Alliance",
+    "assembly" : "The Assembly",
     "score" : "Score"
+  },
+  "projects" : {
+    "finished" : "Finished",
+    "in_progress": "In progress",
+    "waiting_for_correction" : "Waiting for correction",
+    "failed" : "Failed",
+    "searching_a_group" : "Searching for a group"
   },
   "errors" : {
     "0_results_for_given_query" : "0 results for the given query",

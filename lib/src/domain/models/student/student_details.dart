@@ -49,7 +49,7 @@ class StudentDetails extends Equatable {
       displayName: map['displayname'] ?? "",
       phone: map['phone'] ?? "",
       picture: map['image']?['link'] ?? "",
-      location: map['location'] ?? "Unavailable",
+      location: map['location'] ?? "",
       wallet: map['wallet'] ?? 0,
       correctionPoints: map['correction_points'] ?? 0,
       cursus: cursus,
