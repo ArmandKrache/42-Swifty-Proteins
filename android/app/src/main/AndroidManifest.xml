@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="app.flutter.test.tech.swifty_proteins">
    <application
-        android:label="Swifty Companion"
+        android:label="Swifty Proteins"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

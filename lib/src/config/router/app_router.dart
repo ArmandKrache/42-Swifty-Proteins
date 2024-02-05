@@ -5,6 +5,7 @@ import 'package:swifty_proteins/src/presentation/views/homepage_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:swifty_proteins/src/presentation/views/login_view.dart';
 import 'package:swifty_proteins/src/presentation/views/ligand_view.dart';
+import 'package:swifty_proteins/example.dart';
 part 'app_router.gr.dart';
 
 
@@ -15,6 +16,7 @@ class AppRouter extends _$AppRouter {
     List<AutoRoute> get routes => [
         CustomRoute(page: HomepageRoute.page, transitionsBuilder: TransitionsBuilders.noTransition, barrierColor: Colors.transparent),
         AutoRoute(page: LigandRoute.page),
+        AutoRoute(page: WebGlCameraRoute.page),
         AutoRoute(page: LoginRoute.page, initial: true),
     ];
 }

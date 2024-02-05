@@ -38,7 +38,7 @@ dependencies:
   auto_route: ^7.6.0
   oktoast: ^3.3.1
   easy_localization: ^3.0.2
-  flutter_launcher_icons: ^0.13.1
+  flutter_launcher_icons: ^0.11.0
   dio: ^5.0.3
   intl: ^0.18.0
   lottie: ^2.3.2
@@ -47,6 +47,10 @@ dependencies:
   flutter_svg: ^2.0.9
   percent_indicator: ^4.2.3
   fl_chart: ^0.66.0
+
+  three_dart: ^0.0.16
+  flutter_gl: ^0.0.21
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

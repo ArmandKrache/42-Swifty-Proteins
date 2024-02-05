@@ -39,6 +39,16 @@ abstract class _$AppRouter extends RootStackRouter {
         child: LoginView(key: args.key),
       );
     },
+    WebGlCameraRoute.name: (routeData) {
+      final args = routeData.argsAs<WebGlCameraRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: WebGlCameraView(
+          key: args.key,
+          fileName: args.fileName,
+        ),
+      );
+    },
   };
 }
 
@@ -118,5 +128,43 @@ class LoginRouteArgs {
   @override
   String toString() {
     return 'LoginRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
+/// [WebGlCameraView]
+class WebGlCameraRoute extends PageRouteInfo<WebGlCameraRouteArgs> {
+  WebGlCameraRoute({
+    Key? key,
+    required String fileName,
+    List<PageRouteInfo>? children,
+  }) : super(
+          WebGlCameraRoute.name,
+          args: WebGlCameraRouteArgs(
+            key: key,
+            fileName: fileName,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'WebGlCameraRoute';
+
+  static const PageInfo<WebGlCameraRouteArgs> page =
+      PageInfo<WebGlCameraRouteArgs>(name);
+}
+
+class WebGlCameraRouteArgs {
+  const WebGlCameraRouteArgs({
+    this.key,
+    required this.fileName,
+  });
+
+  final Key? key;
+
+  final String fileName;
+
+  @override
+  String toString() {
+    return 'WebGlCameraRouteArgs{key: $key, fileName: $fileName}';
   }
 }

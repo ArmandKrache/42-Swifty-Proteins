@@ -9,6 +9,7 @@ class CustomSearchBar extends StatelessWidget {
   final double width;
   final int debounceDelay;
   final EdgeInsets margin;
+  final Widget? leading;
 
   const CustomSearchBar({
     super.key,
@@ -17,7 +18,8 @@ class CustomSearchBar extends StatelessWidget {
     this.hintText = "Search",
     this.width = 400,
     this.debounceDelay = 500,
-    this.margin = EdgeInsets.zero
+    this.margin = EdgeInsets.zero,
+    this.leading,
   });
 
   @override
@@ -37,7 +39,7 @@ class CustomSearchBar extends StatelessWidget {
             onChanged.call(query);
           });
         },
-        leading: const Icon(Icons.search),
+        leading: leading,
         elevation: MaterialStateProperty.all(0),
         surfaceTintColor: MaterialStateProperty.all(Colors.white),
         shape: MaterialStateProperty.all(RoundedRectangleBorder(

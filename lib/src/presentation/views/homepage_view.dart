@@ -1,13 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:swifty_proteins/src/config/app_colors.dart';
+import 'package:swifty_proteins/src/config/config.dart';
 import 'package:swifty_proteins/src/config/router/app_router.dart';
-import 'package:swifty_proteins/src/domain/models/coalition/coalition.dart';
-import 'package:swifty_proteins/src/domain/models/event/event.dart';
-import 'package:swifty_proteins/src/domain/models/student/student.dart';
 import 'package:swifty_proteins/src/presentation/cubits/homepage/homepage_cubit.dart';
-import 'package:swifty_proteins/src/presentation/widgets/coalition_banner.dart';
-import 'package:swifty_proteins/src/presentation/widgets/coalition_card.dart';
 import 'package:swifty_proteins/src/presentation/widgets/event_card.dart';
 import 'package:swifty_proteins/src/presentation/widgets/search_bar_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,24 +18,37 @@ class HomepageView extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final homepageCubit = BlocProvider.of<HomepageCubit>(context);
-    final TextEditingController searchController = TextEditingController();
+    final TextEditingController searchController = useTextEditingController();
+    final query = useState<String>("");
+    final isFirstBuild = useState<bool>(true);
+
 
     useEffect(() {
       homepageCubit.initData();
       return;
     }, const []);
 
+    useEffect(() {
+      if (!isFirstBuild.value) {
+        homepageCubit.rebuild();
+      } else {
+        isFirstBuild.value = false;
+      }
+      return;
+    }, [query.value]);
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: CustomSearchBar(
           controller: searchController,
-          onChanged: (query) async {
-            //TODO: filter ligands list
+          onChanged: (newQuery) async {
+            query.value = newQuery;
           },
           margin: const EdgeInsets.all(8),
           width: double.maxFinite,
-          hintText: tr("homepage.search_student_by_login"),
+          hintText: tr("homepage.filter_by_name"),
+          leading: null,
         ),
         actions: [
           GestureDetector(
@@ -70,14 +79,14 @@ class HomepageView extends HookWidget {
               return const Center(child: Icon(Icons.refresh));
             }
             else {
-              return _buildBody(homepageCubit, searchController);
+              return _buildBody(homepageCubit, searchController, query.value);
             }
         }
       )
     );
   }
 
-  Widget _buildBody(HomepageCubit homepageCubit, TextEditingController searchController) {
+  Widget _buildBody(HomepageCubit homepageCubit, TextEditingController searchController, String query) {
     return SafeArea(
       left: false,
       right: false,
@@ -90,7 +99,7 @@ class HomepageView extends HookWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 24,),
-                  _buildLigandsListWidget(homepageCubit.state.ligands ?? [])
+                  _buildLigandsListWidget(homepageCubit.state.ligands ?? [], query)
                 ],
               ),
             ),
@@ -100,13 +109,17 @@ class HomepageView extends HookWidget {
     );
   }
 
-  Widget _buildLigandsListWidget(List<String> ligands) {
+  Widget _buildLigandsListWidget(List<String> ligands, String query) {
+    List<String> filteredList = ligands;
+    if (query != "" ) {
+      filteredList = ligands.where((item) => item.contains(query)).toList();
+    }
     return Wrap(
       runSpacing: 16,
       spacing: 16,
       children: [
-        for (int i = 0; i < ligands.length; i++)
-          _ligandCard(ligands[i])
+        for (int i = 0; i < filteredList.length; i++)
+          _ligandCard(filteredList[i])
       ],
     );
   }
@@ -114,7 +127,8 @@ class HomepageView extends HookWidget {
   Widget _ligandCard(String name) {
     return GestureDetector(
       onTap: () {
-        appRouter.push(LigandRoute(ligandId: name));
+        ///appRouter.push(LigandRoute(ligandId: name));
+        appRouter.push(WebGlCameraRoute(fileName: ''));
       },
       child: Container(
         width: 64,

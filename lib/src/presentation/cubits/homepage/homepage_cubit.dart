@@ -23,6 +23,11 @@ class HomepageCubit extends BaseCubit<HomepageState, List<String>> {
 
   HomepageCubit(this._apiRepository) : super(const HomepageLoading(), []);
 
+  Future<void> rebuild() async {
+    emit(HomepageLoading(ligands: ligands));
+    emit(HomepageSuccess(ligands: ligands));
+  }
+
   Future<void> initData() async {
     if (isBusy) return;
     emit(const HomepageLoading());
@@ -30,7 +35,6 @@ class HomepageCubit extends BaseCubit<HomepageState, List<String>> {
     ligands = await parseLigandNamesFile();
 
     emit(HomepageSuccess(ligands: ligands,));
-
     return;
   }
 

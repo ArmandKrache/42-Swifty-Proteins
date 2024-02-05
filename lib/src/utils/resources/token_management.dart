@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:swifty_proteins/.secret.dart';
 import 'package:swifty_proteins/src/config/config.dart';
 import 'package:swifty_proteins/src/domain/models/login_request.dart';
 import 'package:swifty_proteins/src/domain/repositories/api_repository.dart';
@@ -21,7 +20,7 @@ Future<void> deleteTokens() async {
 }
 
 Future<String?> refreshToken() async {
-  final response = await locator<ApiRepository>().getTokens(request: LoginRequest(client_secret: client_secret, client_id: client_id));
+  final response = await locator<ApiRepository>().getTokens(request: LoginRequest(client_secret: "", client_id: ""));
   if (response is DataSuccess) {
     await storeAccessToken(response.data!.accessToken);
     return await getAccessToken();

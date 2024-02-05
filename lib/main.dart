@@ -1,3 +1,4 @@
+import 'package:swifty_proteins/src/config/config.dart';
 import 'package:swifty_proteins/src/config/router/app_router.dart';
 import 'package:swifty_proteins/src/config/app_themes.dart';
 import 'package:swifty_proteins/src/domain/repositories/api_repository.dart';
@@ -15,6 +16,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await initializeDependencies();
+
+  //await initGL();
 
   await EasyLocalization.ensureInitialized();
   runApp(EasyLocalization(
@@ -44,7 +47,7 @@ class MyApp extends StatelessWidget {
       child: OKToast(child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         routerConfig: appRouter.config(),
-        title: 'Swifty Companion',
+        title: 'Swifty Proteins',
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
         locale: context.locale,

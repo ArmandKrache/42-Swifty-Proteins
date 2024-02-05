@@ -1,5 +1,8 @@
 PODS:
   - Flutter (1.0.0)
+  - flutter_gl (0.0.3):
+    - Flutter
+    - three3d_egl (~> 0.1.3)
   - flutter_secure_storage (6.0.0):
     - Flutter
   - path_provider_foundation (0.0.1):
@@ -8,16 +11,24 @@ PODS:
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
+  - three3d_egl (0.1.3)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
+  - flutter_gl (from `.symlinks/plugins/flutter_gl/ios`)
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
 
+SPEC REPOS:
+  trunk:
+    - three3d_egl
+
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
+  flutter_gl:
+    :path: ".symlinks/plugins/flutter_gl/ios"
   flutter_secure_storage:
     :path: ".symlinks/plugins/flutter_secure_storage/ios"
   path_provider_foundation:
@@ -27,9 +38,11 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  flutter_gl: 5a5603f35db897697f064027864a32b15d0c421d
   flutter_secure_storage: 23fc622d89d073675f2eaa109381aefbcf5a49be
   path_provider_foundation: 3784922295ac71e43754bd15e0653ccfd36a147c
   shared_preferences_foundation: b4c3b4cddf1c21f02770737f147a3f5da9d39695
+  three3d_egl: de2cd4950ad2d5f2122166c36583bde4c812e7b5
 
 PODFILE CHECKSUM: c4c93c5f6502fe2754f48404d3594bf779584011
 

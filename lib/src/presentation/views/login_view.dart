@@ -5,7 +5,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:swifty_proteins/.secret.dart';
 import 'package:swifty_proteins/src/config/app_assets.dart';
 import 'package:swifty_proteins/src/config/app_colors.dart';
 import 'package:swifty_proteins/src/config/config.dart';
@@ -61,49 +60,31 @@ class LoginView extends HookWidget {
   Widget _buildBody(BuildContext context, LoginCubit remoteLoginCubit, DioException? error) {
     return Stack(
       children: [
-        Image.asset(AppAssets.orderBackground, fit: BoxFit.fitHeight, height: double.maxFinite,),
+        Image.asset(AppAssets.background, fit: BoxFit.fitHeight, height: double.maxFinite,),
         SafeArea(
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 const Expanded(child: SizedBox()),
-                SvgPicture.asset(AppAssets.white42LogoSVG, width: 192,),
-                const SizedBox(height: 8,),
                 Text(tr("app_name_caps"),
-                  style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
+                  style: const TextStyle(color: Colors.black87, fontSize: 22, fontWeight: FontWeight.bold),
                 ),
                 const Expanded(flex: 3, child: SizedBox()),
                 TextButton(
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(AppColors.order),
+                    backgroundColor: MaterialStateProperty.all(Colors.pink),
                     textStyle: MaterialStateProperty.all(const TextStyle(color: Colors.white)),
                     padding: MaterialStateProperty.all(const EdgeInsets.symmetric(vertical: 8, horizontal: 16)),
                   ),
                   onPressed: () {
-                    remoteLoginCubit.logIn(LoginRequest(client_id: client_id, client_secret: client_secret));
+                    remoteLoginCubit.logIn(LoginRequest(client_id: "", client_secret: ""));
                   },
                   child: Container(
                       padding: const EdgeInsets.all(8),
                       child: Text(tr("log_in"),
                         style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
                       ),
-                  ),
-                ),
-                TextButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(AppColors.order),
-                    textStyle: MaterialStateProperty.all(const TextStyle(color: Colors.white)),
-                    padding: MaterialStateProperty.all(const EdgeInsets.symmetric(vertical: 8, horizontal: 16)),
-                  ),
-                  onPressed: () {
-                    remoteLoginCubit.fetchLigand();
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    child: Text(tr("Test Fetch"),
-                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
-                    ),
                   ),
                 ),
                 Container(

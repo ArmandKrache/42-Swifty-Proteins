@@ -4,7 +4,7 @@
   "log_in" : "Se connecter",
   "homepage" : {
     "logout" : "Se déconnecter",
-    "search_student_by_login" : "Rechercher par login",
+    "filter_by_name" : "Filtrer par nom",
     "events" : "Événements"
   },
   "student" : {
