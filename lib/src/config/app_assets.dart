@@ -1,7 +1,10 @@
-import 'package:swifty_companion/src/config/app_colors.dart';
-import 'package:swifty_companion/src/domain/models/coalition/coalition.dart';
+import 'package:swifty_proteins/src/config/app_colors.dart';
+import 'package:swifty_proteins/src/domain/models/coalition/coalition.dart';
 
 class AppAssets {
+  static const String testFileHEM = "assets/files/HEM.sdf";
+  static const String ligandsNames = "assets/files/ligands.txt";
+
   static const String white42LogoSVG = "assets/images/42_logo.svg";
 
   static const String orderBackground = "assets/images/bg_order.jpg";

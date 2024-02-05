@@ -2,11 +2,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:swifty_companion/src/config/app_assets.dart';
-import 'package:swifty_companion/src/config/app_colors.dart';
-import 'package:swifty_companion/src/config/app_strings.dart';
-import 'package:swifty_companion/src/config/config.dart';
-import 'package:swifty_companion/src/domain/models/event/event.dart';
+import 'package:swifty_proteins/src/config/app_assets.dart';
+import 'package:swifty_proteins/src/config/app_colors.dart';
+import 'package:swifty_proteins/src/config/app_strings.dart';
+import 'package:swifty_proteins/src/config/config.dart';
+import 'package:swifty_proteins/src/domain/models/event/event.dart';
 
 String _formatDateAndStartingHour(DateTime start) {
   return "${start.day}/${start.month}/${start.year} - ${start.hour}:${start.minute}${start.minute == 0 ? "0" : ""}";

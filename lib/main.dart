@@ -1,10 +1,10 @@
-import 'package:swifty_companion/src/config/router/app_router.dart';
-import 'package:swifty_companion/src/config/app_themes.dart';
-import 'package:swifty_companion/src/domain/repositories/api_repository.dart';
-import 'package:swifty_companion/src/locator.dart';
-import 'package:swifty_companion/src/presentation/cubits/homepage/homepage_cubit.dart';
-import 'package:swifty_companion/src/presentation/cubits/login/login_cubit.dart';
-import 'package:swifty_companion/src/presentation/cubits/student/student_cubit.dart';
+import 'package:swifty_proteins/src/config/router/app_router.dart';
+import 'package:swifty_proteins/src/config/app_themes.dart';
+import 'package:swifty_proteins/src/domain/repositories/api_repository.dart';
+import 'package:swifty_proteins/src/locator.dart';
+import 'package:swifty_proteins/src/presentation/cubits/homepage/homepage_cubit.dart';
+import 'package:swifty_proteins/src/presentation/cubits/ligand/ligand_cubit.dart';
+import 'package:swifty_proteins/src/presentation/cubits/login/login_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => LoginCubit(
           locator<ApiRepository>(),),
         ),
-        BlocProvider(create: (context) => StudentCubit(
+        BlocProvider(create: (context) => LigandCubit(
           locator<ApiRepository>(),),
         ),
       ],

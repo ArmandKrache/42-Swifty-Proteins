@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:swifty_companion/src/config/app_assets.dart';
-import 'package:swifty_companion/src/config/app_colors.dart';
-import 'package:swifty_companion/src/domain/models/coalition/coalition.dart';
+import 'package:swifty_proteins/src/config/app_assets.dart';
+import 'package:swifty_proteins/src/config/app_colors.dart';
+import 'package:swifty_proteins/src/domain/models/coalition/coalition.dart';
 
 Color getCoalitionColor(CoalitionType coalition) {
   switch (coalition) {

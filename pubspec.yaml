@@ -1,5 +1,5 @@
-name: swifty_companion
-description: A 42 Project
+name: swifty_proteins
+description: Another 42 Project
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -83,6 +83,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
+    - assets/files/
     - assets/translations/
     - assets/images/
 

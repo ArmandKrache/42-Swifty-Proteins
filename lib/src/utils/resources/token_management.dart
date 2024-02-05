@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:swifty_companion/.secret.dart';
-import 'package:swifty_companion/src/config/config.dart';
-import 'package:swifty_companion/src/domain/models/login_request.dart';
-import 'package:swifty_companion/src/domain/repositories/api_repository.dart';
-import 'package:swifty_companion/src/locator.dart';
-import 'package:swifty_companion/src/utils/resources/data_state.dart';
+import 'package:swifty_proteins/.secret.dart';
+import 'package:swifty_proteins/src/config/config.dart';
+import 'package:swifty_proteins/src/domain/models/login_request.dart';
+import 'package:swifty_proteins/src/domain/repositories/api_repository.dart';
+import 'package:swifty_proteins/src/locator.dart';
+import 'package:swifty_proteins/src/utils/resources/data_state.dart';
 
 Future<void> storeAccessToken(String token) async {
   await storage.write(key: 'access_token', value: token);

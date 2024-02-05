@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:swifty_companion/src/config/config.dart';
+import 'package:swifty_proteins/src/config/config.dart';
 
 enum CoalitionType {
   order,

@@ -1,12 +1,13 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
-import 'package:oktoast/oktoast.dart';
+import 'dart:developer';
+
 import 'package:swifty_proteins/src/config/config.dart';
 import 'package:swifty_proteins/src/config/router/app_router.dart';
 import 'package:swifty_proteins/src/data/parsing/parser.dart';
 import 'package:swifty_proteins/src/domain/models/coalition/coalition.dart';
-import 'package:swifty_proteins/src/domain/models/event/event.dart';
+import 'package:swifty_proteins/src/domain/models/ligand/ligand.dart';
+import 'package:swifty_proteins/src/domain/models/login_request.dart';
 import 'package:swifty_proteins/src/domain/models/student/student.dart';
+import 'package:swifty_proteins/src/domain/models/student/student_details.dart';
 import 'package:swifty_proteins/src/domain/repositories/api_repository.dart';
 import 'package:swifty_proteins/src/presentation/cubits/base/base_cubit.dart';
 import 'package:dio/dio.dart';
@@ -15,28 +16,30 @@ import 'package:swifty_proteins/src/utils/resources/data_state.dart';
 import 'package:swifty_proteins/src/utils/resources/functions.dart';
 import 'package:swifty_proteins/src/utils/resources/token_management.dart';
 
-part 'homepage_state.dart';
+part 'ligand_state.dart';
 
-class HomepageCubit extends BaseCubit<HomepageState, List<String>> {
+class LigandCubit extends BaseCubit<LigandState, Ligand?> {
   final ApiRepository _apiRepository;
-  List<String> ligands = [];
+  Ligand? ligand;
 
-  HomepageCubit(this._apiRepository) : super(const HomepageLoading(), []);
+  LigandCubit(this._apiRepository) : super(const LigandLoading(), null);
 
-  Future<void> initData() async {
+
+  Future<void> getLigand({String id = "HEM"}) async {
     if (isBusy) return;
-    emit(const HomepageLoading());
 
-    ligands = await parseLigandNamesFile();
+    final response =
+    await _apiRepository.getLigand(id);
 
-    emit(HomepageSuccess(ligands: ligands,));
+    if (response is DataSuccess) {
+      ligand = parseRawData(response.data);
 
+      emit(LigandSuccess(ligand: ligand,));
+
+    } else if (response is DataFailed) {
+      logger.d(response.exception);
+      emit(LigandFailed(exception: response.exception,));
+    }
     return;
   }
-
-  Future<void> logOut() async {
-    deleteTokens();
-    appRouter.popUntil((route) => route.data?.name == "LoginRoute");
-  }
-
 }

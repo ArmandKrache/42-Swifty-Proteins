@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
-import 'package:swifty_companion/src/domain/models/coalition/coalition.dart';
-import 'package:swifty_companion/src/domain/models/cursus.dart';
-import 'package:swifty_companion/src/domain/models/project.dart';
+import 'package:swifty_proteins/src/domain/models/coalition/coalition.dart';
+import 'package:swifty_proteins/src/domain/models/cursus.dart';
+import 'package:swifty_proteins/src/domain/models/project.dart';
 
 class StudentDetails extends Equatable {
   final int id;

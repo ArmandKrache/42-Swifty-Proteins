@@ -2,9 +2,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:swifty_companion/src/config/app_assets.dart';
-import 'package:swifty_companion/src/domain/models/coalition/coalition.dart';
-import 'package:swifty_companion/src/utils/coalition_functions.dart';
+import 'package:swifty_proteins/src/config/app_assets.dart';
+import 'package:swifty_proteins/src/domain/models/coalition/coalition.dart';
+import 'package:swifty_proteins/src/utils/coalition_functions.dart';
 
 class CoalitionCard extends StatelessWidget {
   final Coalition coalition;

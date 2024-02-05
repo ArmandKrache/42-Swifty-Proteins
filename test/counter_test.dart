@@ -1,4 +1,4 @@
-import 'package:swifty_companion/widgets/counter.dart';
+import 'package:swifty_proteins/widgets/counter.dart';
 import 'package:test/test.dart';
 
 void main() {

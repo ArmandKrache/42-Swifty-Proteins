@@ -1,10 +1,10 @@
 
-import 'package:swifty_companion/src/data/api_repository_impl.dart';
-import 'package:swifty_companion/src/data/api_service.dart';
-import 'package:swifty_companion/src/domain/repositories/api_repository.dart';
+import 'package:swifty_proteins/src/data/api_repository_impl.dart';
+import 'package:swifty_proteins/src/data/api_service.dart';
+import 'package:swifty_proteins/src/domain/repositories/api_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:swifty_companion/src/utils/resources/token_management.dart';
+import 'package:swifty_proteins/src/utils/resources/token_management.dart';
 
 final locator = GetIt.instance;
 

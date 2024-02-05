@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
-import 'package:swifty_companion/src/domain/models/coalition/coalition.dart';
-import 'package:swifty_companion/src/domain/models/event/event.dart';
-import 'package:swifty_companion/src/domain/models/student/student.dart';
+import 'package:swifty_proteins/src/domain/models/coalition/coalition.dart';
+import 'package:swifty_proteins/src/domain/models/event/event.dart';
+import 'package:swifty_proteins/src/domain/models/student/student.dart';
 
 class StudentListResponse extends Equatable {
   final List<Student> students;

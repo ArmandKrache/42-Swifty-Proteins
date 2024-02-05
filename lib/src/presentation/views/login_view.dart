@@ -1,12 +1,18 @@
+import 'dart:io';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:swifty_companion/.secret.dart';
-import 'package:swifty_companion/src/config/app_assets.dart';
-import 'package:swifty_companion/src/config/app_colors.dart';
-import 'package:swifty_companion/src/domain/models/login_request.dart';
-import 'package:swifty_companion/src/presentation/cubits/login/login_cubit.dart';
+import 'package:swifty_proteins/.secret.dart';
+import 'package:swifty_proteins/src/config/app_assets.dart';
+import 'package:swifty_proteins/src/config/app_colors.dart';
+import 'package:swifty_proteins/src/config/config.dart';
+import 'package:swifty_proteins/src/data/parsing/parser.dart';
+import 'package:swifty_proteins/src/domain/models/ligand/ligand.dart';
+import 'package:swifty_proteins/src/domain/models/login_request.dart';
+import 'package:swifty_proteins/src/presentation/cubits/login/login_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,6 +28,14 @@ class LoginView extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    /*Future<Ligand> ligand = parseFromFile(AppAssets.testFileHEM);
+
+    ligand.then((Ligand ligand) {
+      logger.d(ligand);
+    }).catchError((error) {
+      logger.d('Error : $error');
+    });*/
+
     final loginCubit = BlocProvider.of<LoginCubit>(context);
 
     useEffect(() {
@@ -74,6 +88,22 @@ class LoginView extends HookWidget {
                       child: Text(tr("log_in"),
                         style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
                       ),
+                  ),
+                ),
+                TextButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(AppColors.order),
+                    textStyle: MaterialStateProperty.all(const TextStyle(color: Colors.white)),
+                    padding: MaterialStateProperty.all(const EdgeInsets.symmetric(vertical: 8, horizontal: 16)),
+                  ),
+                  onPressed: () {
+                    remoteLoginCubit.fetchLigand();
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    child: Text(tr("Test Fetch"),
+                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                    ),
                   ),
                 ),
                 Container(

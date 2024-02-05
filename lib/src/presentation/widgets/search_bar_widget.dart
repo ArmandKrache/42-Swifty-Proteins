@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:swifty_companion/src/utils/resources/debouncer.dart';
+import 'package:swifty_proteins/src/utils/resources/debouncer.dart';
 
 class CustomSearchBar extends StatelessWidget {
   final TextEditingController controller;

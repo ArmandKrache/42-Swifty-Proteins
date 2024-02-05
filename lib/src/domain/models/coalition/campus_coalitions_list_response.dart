@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:swifty_companion/src/config/config.dart';
-import 'package:swifty_companion/src/domain/models/coalition/coalition.dart';
+import 'package:swifty_proteins/src/config/config.dart';
+import 'package:swifty_proteins/src/domain/models/coalition/coalition.dart';
 
 class CampusCoalitionListResponse extends Equatable {
   final List<Coalition> coalitions;

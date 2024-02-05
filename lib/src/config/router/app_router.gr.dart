@@ -21,22 +21,22 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const HomepageView(),
       );
     },
+    LigandRoute.name: (routeData) {
+      final args = routeData.argsAs<LigandRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: LigandView(
+          key: args.key,
+          ligandId: args.ligandId,
+        ),
+      );
+    },
     LoginRoute.name: (routeData) {
       final args = routeData.argsAs<LoginRouteArgs>(
           orElse: () => const LoginRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: LoginView(key: args.key),
-      );
-    },
-    StudentRoute.name: (routeData) {
-      final args = routeData.argsAs<StudentRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: StudentView(
-          key: args.key,
-          studentId: args.studentId,
-        ),
       );
     },
   };
@@ -54,6 +54,43 @@ class HomepageRoute extends PageRouteInfo<void> {
   static const String name = 'HomepageRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [LigandView]
+class LigandRoute extends PageRouteInfo<LigandRouteArgs> {
+  LigandRoute({
+    Key? key,
+    required String ligandId,
+    List<PageRouteInfo>? children,
+  }) : super(
+          LigandRoute.name,
+          args: LigandRouteArgs(
+            key: key,
+            ligandId: ligandId,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'LigandRoute';
+
+  static const PageInfo<LigandRouteArgs> page = PageInfo<LigandRouteArgs>(name);
+}
+
+class LigandRouteArgs {
+  const LigandRouteArgs({
+    this.key,
+    required this.ligandId,
+  });
+
+  final Key? key;
+
+  final String ligandId;
+
+  @override
+  String toString() {
+    return 'LigandRouteArgs{key: $key, ligandId: $ligandId}';
+  }
 }
 
 /// generated route for
@@ -81,43 +118,5 @@ class LoginRouteArgs {
   @override
   String toString() {
     return 'LoginRouteArgs{key: $key}';
-  }
-}
-
-/// generated route for
-/// [StudentView]
-class StudentRoute extends PageRouteInfo<StudentRouteArgs> {
-  StudentRoute({
-    Key? key,
-    required String studentId,
-    List<PageRouteInfo>? children,
-  }) : super(
-          StudentRoute.name,
-          args: StudentRouteArgs(
-            key: key,
-            studentId: studentId,
-          ),
-          initialChildren: children,
-        );
-
-  static const String name = 'StudentRoute';
-
-  static const PageInfo<StudentRouteArgs> page =
-      PageInfo<StudentRouteArgs>(name);
-}
-
-class StudentRouteArgs {
-  const StudentRouteArgs({
-    this.key,
-    required this.studentId,
-  });
-
-  final Key? key;
-
-  final String studentId;
-
-  @override
-  String toString() {
-    return 'StudentRouteArgs{key: $key, studentId: $studentId}';
   }
 }
