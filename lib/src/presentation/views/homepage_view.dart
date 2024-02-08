@@ -40,30 +40,38 @@ class HomepageView extends HookWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: CustomSearchBar(
-          controller: searchController,
-          onChanged: (newQuery) async {
-            query.value = newQuery;
-          },
-          margin: const EdgeInsets.all(8),
-          width: double.maxFinite,
-          hintText: tr("homepage.filter_by_name"),
-          leading: null,
+        title: Align(
+          alignment: Alignment.centerLeft,
+          child: CustomSearchBar(
+            controller: searchController,
+            onChanged: (newQuery) async {
+              query.value = newQuery;
+            },
+            margin: const EdgeInsets.all(8),
+            width: 256,
+            hintText: tr("homepage.filter_by_name"),
+            leading: null,
+          ),
         ),
         actions: [
-          GestureDetector(
-            onTap: () {
-              homepageCubit.logOut();
-            },
-            child: Align(
-              alignment: Alignment.centerRight,
-              child: Container(
-                padding: const EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                    color: AppColors.alert.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(8)
+          Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: GestureDetector(
+              onTap: () {
+                homepageCubit.logOut();
+              },
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Container(
+                  padding: const EdgeInsets.all(4),
+                  child: const Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.logout_outlined, color: AppColors.alert,),
+                      Text("logout", style: TextStyle(fontSize: 11, color: AppColors.alert),)
+                    ],
+                  ),
                 ),
-                child: const Icon(Icons.logout_outlined,),
               ),
             ),
           )
@@ -127,8 +135,10 @@ class HomepageView extends HookWidget {
   Widget _ligandCard(String name) {
     return GestureDetector(
       onTap: () {
-        ///appRouter.push(LigandRoute(ligandId: name));
-        appRouter.push(WebGlCameraRoute(fileName: ''));
+        appRouter.push(LigandRoute(ligandId: name));
+
+        ///appRouter.push(WebGlCameraRoute(fileName: ''));
+
       },
       child: Container(
         width: 64,

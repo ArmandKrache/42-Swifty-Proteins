@@ -39,13 +39,13 @@ abstract class _$AppRouter extends RootStackRouter {
         child: LoginView(key: args.key),
       );
     },
-    WebGlCameraRoute.name: (routeData) {
-      final args = routeData.argsAs<WebGlCameraRouteArgs>();
+    Model3DRoute.name: (routeData) {
+      final args = routeData.argsAs<Model3DRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: WebGlCameraView(
+        child: Model3DView(
           key: args.key,
-          fileName: args.fileName,
+          ligand: args.ligand,
         ),
       );
     },
@@ -128,6 +128,83 @@ class LoginRouteArgs {
   @override
   String toString() {
     return 'LoginRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
+/// [MiscControlsTrackballView]
+class MiscControlsTrackballRoute
+    extends PageRouteInfo<MiscControlsTrackballRouteArgs> {
+  MiscControlsTrackballRoute({
+    Key? key,
+    required String fileName,
+    List<PageRouteInfo>? children,
+  }) : super(
+          MiscControlsTrackballRoute.name,
+          args: MiscControlsTrackballRouteArgs(
+            key: key,
+            fileName: fileName,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'MiscControlsTrackballRoute';
+
+  static const PageInfo<MiscControlsTrackballRouteArgs> page =
+      PageInfo<MiscControlsTrackballRouteArgs>(name);
+}
+
+class MiscControlsTrackballRouteArgs {
+  const MiscControlsTrackballRouteArgs({
+    this.key,
+    required this.fileName,
+  });
+
+  final Key? key;
+
+  final String fileName;
+
+  @override
+  String toString() {
+    return 'MiscControlsTrackballRouteArgs{key: $key, fileName: $fileName}';
+  }
+}
+
+/// generated route for
+/// [Model3DView]
+class Model3DRoute extends PageRouteInfo<Model3DRouteArgs> {
+  Model3DRoute({
+    Key? key,
+    required Ligand ligand,
+    List<PageRouteInfo>? children,
+  }) : super(
+          Model3DRoute.name,
+          args: Model3DRouteArgs(
+            key: key,
+            ligand: ligand,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'Model3DRoute';
+
+  static const PageInfo<Model3DRouteArgs> page =
+      PageInfo<Model3DRouteArgs>(name);
+}
+
+class Model3DRouteArgs {
+  const Model3DRouteArgs({
+    this.key,
+    required this.ligand,
+  });
+
+  final Key? key;
+
+  final Ligand ligand;
+
+  @override
+  String toString() {
+    return 'Model3DRouteArgs{key: $key, ligand: $ligand}';
   }
 }
 

@@ -25,11 +25,13 @@ class LigandCubit extends BaseCubit<LigandState, Ligand?> {
   LigandCubit(this._apiRepository) : super(const LigandLoading(), null);
 
 
-  Future<void> getLigand({String id = "HEM"}) async {
+  Future<void> getLigand(String id) async {
     if (isBusy) return;
+      emit(LigandLoading(ligand: ligand,));
+
 
     final response =
-    await _apiRepository.getLigand(id);
+      await _apiRepository.getLigand(id);
 
     if (response is DataSuccess) {
       ligand = parseRawData(response.data);

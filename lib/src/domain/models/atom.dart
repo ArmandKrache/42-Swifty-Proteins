@@ -1,21 +1,26 @@
 import 'package:equatable/equatable.dart';
 import 'package:swifty_proteins/src/domain/models/position.dart';
+import 'package:three_dart/three_dart.dart' as three;
+
 
 class Atom extends Equatable {
-  final Position position;
+  //final Position position;
   final String element;
+  final three.Vector3 position;
 
 
   const Atom({
-    required this.position,
+    //required this.position,
     required this.element,
+    required this.position,
   });
 
 
   factory Atom.fromMap(Map<String, dynamic> map) {
     return Atom(
       element: map['element'] ?? "",
-      position: Position(x: map["x"] ?? 0.0, y: map["y"] ?? 0.0, z: map["z"] ?? 0.0,)
+      //position: Position(x: map["x"] ?? 0.0, y: map["y"] ?? 0.0, z: map["z"] ?? 0.0,),
+      position: three.Vector3(map["x"] ?? 0.0, map["y"] ?? 0.0, map["z"] ?? 0.0),
     );
   }
 

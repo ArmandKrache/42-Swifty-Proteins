@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:swifty_proteins/src/config/config.dart';
 import 'package:swifty_proteins/src/config/router/app_router.dart';
 import 'package:swifty_proteins/src/config/app_themes.dart';
@@ -17,7 +18,10 @@ void main() async {
 
   await initializeDependencies();
 
-  //await initGL();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
 
   await EasyLocalization.ensureInitialized();
   runApp(EasyLocalization(

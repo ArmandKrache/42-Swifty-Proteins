@@ -8,7 +8,7 @@
 PRODUCT_NAME = swifty_proteins
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = app.flutter.test.tech.swifty_proteins
+PRODUCT_BUNDLE_IDENTIFIER = app.flutter.akrache.swifty-proteins
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2023 app.flutter.test.tech. All rights reserved.

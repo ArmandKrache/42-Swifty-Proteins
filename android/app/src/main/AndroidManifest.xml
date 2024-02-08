@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="app.flutter.test.tech.swifty_proteins">
+    package="app.flutter.akrache.swifty-proteins">
    <application
         android:label="Swifty Proteins"
         android:name="${applicationName}"
