@@ -21,6 +21,8 @@
 	</array>
 	<key>CFBundleName</key>
 	<string>swifty_proteins</string>
+	<key>NSFaceIDUsageDescription</key>
+    <string>Why is my app authenticating using face id?</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>

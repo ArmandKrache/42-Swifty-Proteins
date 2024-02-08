@@ -49,6 +49,14 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    SignUpRoute.name: (routeData) {
+      final args = routeData.argsAs<SignUpRouteArgs>(
+          orElse: () => const SignUpRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: SignUpView(key: args.key),
+      );
+    },
   };
 }
 
@@ -132,45 +140,6 @@ class LoginRouteArgs {
 }
 
 /// generated route for
-/// [MiscControlsTrackballView]
-class MiscControlsTrackballRoute
-    extends PageRouteInfo<MiscControlsTrackballRouteArgs> {
-  MiscControlsTrackballRoute({
-    Key? key,
-    required String fileName,
-    List<PageRouteInfo>? children,
-  }) : super(
-          MiscControlsTrackballRoute.name,
-          args: MiscControlsTrackballRouteArgs(
-            key: key,
-            fileName: fileName,
-          ),
-          initialChildren: children,
-        );
-
-  static const String name = 'MiscControlsTrackballRoute';
-
-  static const PageInfo<MiscControlsTrackballRouteArgs> page =
-      PageInfo<MiscControlsTrackballRouteArgs>(name);
-}
-
-class MiscControlsTrackballRouteArgs {
-  const MiscControlsTrackballRouteArgs({
-    this.key,
-    required this.fileName,
-  });
-
-  final Key? key;
-
-  final String fileName;
-
-  @override
-  String toString() {
-    return 'MiscControlsTrackballRouteArgs{key: $key, fileName: $fileName}';
-  }
-}
-
-/// generated route for
 /// [Model3DView]
 class Model3DRoute extends PageRouteInfo<Model3DRouteArgs> {
   Model3DRoute({
@@ -209,39 +178,29 @@ class Model3DRouteArgs {
 }
 
 /// generated route for
-/// [WebGlCameraView]
-class WebGlCameraRoute extends PageRouteInfo<WebGlCameraRouteArgs> {
-  WebGlCameraRoute({
+/// [SignUpView]
+class SignUpRoute extends PageRouteInfo<SignUpRouteArgs> {
+  SignUpRoute({
     Key? key,
-    required String fileName,
     List<PageRouteInfo>? children,
   }) : super(
-          WebGlCameraRoute.name,
-          args: WebGlCameraRouteArgs(
-            key: key,
-            fileName: fileName,
-          ),
+          SignUpRoute.name,
+          args: SignUpRouteArgs(key: key),
           initialChildren: children,
         );
 
-  static const String name = 'WebGlCameraRoute';
+  static const String name = 'SignUpRoute';
 
-  static const PageInfo<WebGlCameraRouteArgs> page =
-      PageInfo<WebGlCameraRouteArgs>(name);
+  static const PageInfo<SignUpRouteArgs> page = PageInfo<SignUpRouteArgs>(name);
 }
 
-class WebGlCameraRouteArgs {
-  const WebGlCameraRouteArgs({
-    this.key,
-    required this.fileName,
-  });
+class SignUpRouteArgs {
+  const SignUpRouteArgs({this.key});
 
   final Key? key;
 
-  final String fileName;
-
   @override
   String toString() {
-    return 'WebGlCameraRouteArgs{key: $key, fileName: $fileName}';
+    return 'SignUpRouteArgs{key: $key}';
   }
 }

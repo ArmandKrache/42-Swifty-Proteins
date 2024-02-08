@@ -10,7 +10,8 @@ import 'package:swifty_proteins/src/config/router/app_router.dart';
 import 'package:swifty_proteins/src/domain/models/atom.dart';
 import 'package:swifty_proteins/src/domain/models/bond.dart';
 import 'package:swifty_proteins/src/domain/models/ligand/ligand.dart';
-import 'package:swifty_proteins/src/utils/extensions/custome_vector3.dart';
+import 'package:swifty_proteins/src/utils/extensions/custom_vector3.dart';
+import 'package:three_dart/three3d/objects/mesh.dart';
 
 import 'package:three_dart/three_dart.dart' as three;
 import 'package:three_dart_jsm/three_dart_jsm.dart' as three_jsm;
@@ -28,6 +29,7 @@ class Model3DView extends StatefulWidget {
 class _Model3DViewState extends State<Model3DView> {
   late FlutterGlPlugin three3dRender;
   three.WebGLRenderer? renderer;
+  List<Map<String, dynamic>> atomsMeshes = [];
 
   int? fboId;
   late double width;
@@ -126,25 +128,28 @@ class _Model3DViewState extends State<Model3DView> {
   }
 
   Widget _build(BuildContext context) {
-    return three_jsm.DomLikeListenable(
-        key: _globalKey,
-        builder: (BuildContext context) {
-          return Container(
-              width: double.maxFinite,
-              height: double.maxFinite,
-              color: Colors.black,
-              child: Builder(builder: (BuildContext context) {
-                if (kIsWeb) {
-                  return three3dRender.isInitialized
-                      ? HtmlElementView(viewType: three3dRender.textureId!.toString())
-                      : Container();
-                } else {
-                  return three3dRender.isInitialized
-                      ? Texture(textureId: three3dRender.textureId!)
-                      : Container();
-                }
-              }));
-        });
+    return GestureDetector(
+      onDoubleTapDown: _handleTapDown,
+      child: three_jsm.DomLikeListenable(
+          key: _globalKey,
+          builder: (BuildContext context) {
+            return Container(
+                width: double.maxFinite,
+                height: double.maxFinite,
+                color: Colors.black,
+                child: Builder(builder: (BuildContext context) {
+                  if (kIsWeb) {
+                    return three3dRender.isInitialized
+                        ? HtmlElementView(viewType: three3dRender.textureId!.toString())
+                        : Container();
+                  } else {
+                    return three3dRender.isInitialized
+                        ? Texture(textureId: three3dRender.textureId!)
+                        : Container();
+                  }
+                }));
+          }),
+    );
   }
 
   render() {
@@ -236,7 +241,7 @@ class _Model3DViewState extends State<Model3DView> {
       mesh.updateMatrix();
       mesh.matrixAutoUpdate = false;
       scene.add(mesh);
-
+      atomsMeshes.add({"atom" : atoms[i], "mesh" : mesh});
     }
 
     var materialBonds = three.MeshPhongMaterial({"color": 0xffffff, "flatShading": false});
@@ -296,11 +301,57 @@ class _Model3DViewState extends State<Model3DView> {
 
   @override
   void dispose() {
-    print(" dispose ............. ");
-
     disposed = true;
     three3dRender.dispose();
 
     super.dispose();
+  }
+
+  void _handleTapDown(TapDownDetails details) {
+    final RenderBox overlay = Overlay.of(context)!.context.findRenderObject() as RenderBox;
+    final hit = _hitTest(details.localPosition, overlay.size);
+
+    if (hit != null) {
+      _displayAtomHint(hit);
+    }
+  }
+
+  Atom? _hitTest(Offset position, Size screenSize) {
+    final double x = (position.dx / screenSize.width) * 2 - 1;
+    final double y = -(position.dy / screenSize.height) * 2 + 1;
+
+    final raycaster = three.Raycaster();
+    raycaster.setFromCamera(three.Vector2(x, y), camera);
+
+    for (final atom in atomsMeshes) {
+      final mesh = atom["mesh"];
+      final intersects = raycaster.intersectObject(mesh, false);
+
+      if (intersects.isNotEmpty) {
+        return atom["atom"];
+      }
+    }
+    return null;
+  }
+
+// Function to display a hint for the tapped atom
+  void _displayAtomHint(Atom atom) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Atom Details'),
+          content: Text('Element: ${atom.element}\nPosition: (${atom.position.x}, ${atom.position.y}, ${atom.position.z})'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Close'),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

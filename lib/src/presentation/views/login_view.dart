@@ -8,6 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:swifty_proteins/src/config/app_assets.dart';
 import 'package:swifty_proteins/src/config/app_colors.dart';
 import 'package:swifty_proteins/src/config/config.dart';
+import 'package:swifty_proteins/src/config/router/app_router.dart';
 import 'package:swifty_proteins/src/data/parsing/parser.dart';
 import 'package:swifty_proteins/src/domain/models/ligand/ligand.dart';
 import 'package:swifty_proteins/src/domain/models/login_request.dart';
@@ -16,6 +17,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:lottie/lottie.dart';
 
 @RoutePage()
 class LoginView extends HookWidget {
@@ -27,18 +29,10 @@ class LoginView extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    /*Future<Ligand> ligand = parseFromFile(AppAssets.testFileHEM);
-
-    ligand.then((Ligand ligand) {
-      logger.d(ligand);
-    }).catchError((error) {
-      logger.d('Error : $error');
-    });*/
-
     final loginCubit = BlocProvider.of<LoginCubit>(context);
 
     useEffect(() {
-      loginCubit.isAlreadyLoggedIn();
+      //loginCubit.isAlreadyLoggedIn();
       return ;
     }, const []);
 
@@ -60,7 +54,7 @@ class LoginView extends HookWidget {
   Widget _buildBody(BuildContext context, LoginCubit remoteLoginCubit, DioException? error) {
     return Stack(
       children: [
-        Image.asset(AppAssets.background, fit: BoxFit.fitHeight, height: double.maxFinite,),
+        Center(child: Lottie.asset(AppAssets.lottieMolecule, width: 200, height: 200)),
         SafeArea(
           child: Center(
             child: Column(
@@ -87,11 +81,27 @@ class LoginView extends HookWidget {
                       ),
                   ),
                 ),
+                const SizedBox(height: 16,),
+                GestureDetector(
+                  onTap: () {
+                    appRouter.push(SignUpRoute());
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 8),
+                    child: const Center(
+                      child: Text("Sign up",
+                        style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold, fontSize: 16),
+                      ),
+                    ),
+                  ),
+                ),
                 Container(
                   margin: const EdgeInsets.only(top: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Center(
                     child: Text(error == null ? "" : error.response?.data.toString() ?? "",
-                      style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold, fontSize: 16),
+                      style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold, fontSize: 12),
+                      textAlign: TextAlign.center,
                     ),
                   ),
                 ),

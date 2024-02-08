@@ -17,24 +17,7 @@ part 'login_state.dart';
 class LoginCubit extends BaseCubit<LoginState, Map<String, dynamic>> {
   final ApiRepository _apiRepository;
 
-  LoginCubit(this._apiRepository) : super(const LoginLoading(), {});
-
-  Future<Ligand?> fetchLigand() async {
-    if (isBusy) return null;
-
-    final response =
-      await _apiRepository.getLigand("HEM");
-
-    if (response is DataSuccess) {
-      logger.d(response.data);
-
-      return parseRawData(response.data);
-
-    } else if (response is DataFailed) {
-      logger.d(response.exception);
-    }
-    return null;
-  }
+  LoginCubit(this._apiRepository) : super(const LoginSuccess(), {});
 
   Future<void> logIn(LoginRequest request) async {
     if (isBusy) return;
@@ -60,6 +43,7 @@ class LoginCubit extends BaseCubit<LoginState, Map<String, dynamic>> {
       });*/
   }
 
+  /*
   Future<void> isAlreadyLoggedIn() async {
     final response =
       await _apiRepository.getTokenInfo();
@@ -76,5 +60,5 @@ class LoginCubit extends BaseCubit<LoginState, Map<String, dynamic>> {
       emit(const LoginLoading());
       emit(LoginFailed(exception: response.exception));
     }
-  }
+  }*/
 }

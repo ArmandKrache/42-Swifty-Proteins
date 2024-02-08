@@ -11,6 +11,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oktoast/oktoast.dart';
+import 'package:swifty_proteins/src/presentation/cubits/signup/signup_cubit.dart';
 
 
 void main() async {
@@ -42,6 +43,9 @@ class MyApp extends StatelessWidget {
           locator<ApiRepository>(),),
         ),
         BlocProvider(create: (context) => LoginCubit(
+          locator<ApiRepository>(),),
+        ),
+        BlocProvider(create: (context) => SignupCubit(
           locator<ApiRepository>(),),
         ),
         BlocProvider(create: (context) => LigandCubit(

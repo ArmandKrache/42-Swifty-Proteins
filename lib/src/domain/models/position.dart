@@ -1,19 +1,17 @@
 import 'package:equatable/equatable.dart';
 
-class Position extends Equatable {
-  final double x;
-  final double y;
-  final double z;
+class User extends Equatable {
+  final String username;
+  final String password;
 
-  const Position({
-    required this.x,
-    required this.y,
-    required this.z,
+  const User({
+    required this.username,
+    required this.password,
   });
 
   @override
   bool get stringify => true;
 
   @override
-  List<Object?> get props => [x, y, z];
+  List<Object?> get props => [username];
 }
