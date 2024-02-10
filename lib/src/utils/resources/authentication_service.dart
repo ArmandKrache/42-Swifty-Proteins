@@ -1,6 +1,4 @@
-import 'package:equatable/equatable.dart';
 import 'package:swifty_proteins/src/config/config.dart';
-import 'package:swifty_proteins/src/domain/models/position.dart';
 
 Future<void> storeCurrentUser(String username) async {
   await storage.write(key: 'current_user', value: username);
@@ -13,6 +11,11 @@ Future<void> removeCurrentUser() async {
 Future<void> storeUser(String username, String password) async {
   await storage.write(key: 'username_$username', value: username);
   await storage.write(key: 'password_$username', value: password);
+}
+
+Future<void> deleteUser(String username) async {
+  await storage.delete(key: 'username_$username');
+  await storage.delete(key: 'password_$username');
 }
 
 

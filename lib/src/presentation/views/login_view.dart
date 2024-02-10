@@ -18,11 +18,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:lottie/lottie.dart';
+import 'package:three_dart/three3d/extras/core/ttf_font.dart';
 
 @RoutePage()
-class LoginView extends HookWidget {
+class LoginView extends HookWidget with WidgetsBindingObserver {
+  final bool resumed;
 
-  LoginView({Key? key}) : super (key: key);
+  LoginView({Key? key, this.resumed = false}) : super (key: key);
 
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
@@ -32,8 +34,16 @@ class LoginView extends HookWidget {
     final loginCubit = BlocProvider.of<LoginCubit>(context);
 
     useEffect(() {
-      //loginCubit.isAlreadyLoggedIn();
-      return ;
+      if (resumed) {
+        onLogin(context, loginCubit);
+      } else {
+        final observer = _LoginViewLifecycleObserver(context);
+        WidgetsBinding.instance?.addObserver(observer);
+        return () {
+          WidgetsBinding.instance?.removeObserver(observer);
+        };
+      }
+      return null;
     }, const []);
 
     return Scaffold(
@@ -51,7 +61,7 @@ class LoginView extends HookWidget {
     );
   }
 
-  Widget _buildBody(BuildContext context, LoginCubit remoteLoginCubit, DioException? error) {
+  Widget _buildBody(BuildContext context, LoginCubit loginCubit, DioException? error) {
     return Stack(
       children: [
         Center(child: Lottie.asset(AppAssets.lottieMolecule, width: 200, height: 200)),
@@ -71,8 +81,8 @@ class LoginView extends HookWidget {
                     textStyle: MaterialStateProperty.all(const TextStyle(color: Colors.white)),
                     padding: MaterialStateProperty.all(const EdgeInsets.symmetric(vertical: 8, horizontal: 16)),
                   ),
-                  onPressed: () {
-                    remoteLoginCubit.logIn(LoginRequest(client_id: "", client_secret: ""));
+                  onPressed: () async {
+                    await onLogin(context, loginCubit);
                   },
                   child: Container(
                       padding: const EdgeInsets.all(8),
@@ -111,5 +121,81 @@ class LoginView extends HookWidget {
         ),
       ],
     );
+  }
+
+  Future<void> onLogin(BuildContext context, LoginCubit loginCubit) async {
+    bool loggedWithBiometric = await loginCubit.loginWithBiometrics(resumed: resumed);
+    if (!loggedWithBiometric) {
+      // ignore: use_build_context_synchronously
+      await showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            backgroundColor: Colors.white,
+            title: const Text('Connect with password', style: TextStyle(fontSize: 14),),
+            content: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+
+                TextField(
+                  controller: usernameController,
+                  cursorColor: Colors.deepPurple,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.deepPurple, style: BorderStyle.solid, width: 1.5)
+                    ),
+                    fillColor: Colors.white,
+                    filled: true,
+                    hintText: 'Username',
+                  ),
+                ),
+                const SizedBox(height: 16,),
+                TextField(
+                  controller: passwordController,
+                  cursorColor: Colors.deepPurple,
+                  obscureText: true,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.deepPurple, style: BorderStyle.solid, width: 1.5)
+                    ),
+                    fillColor: Colors.white,
+                    filled: true,
+                    hintText: 'Password',
+                  ),
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  if (usernameController.text != "" && passwordController.text != "") {
+                    loginCubit.logInWithCredentials(usernameController.text, passwordController.text, resumed: resumed);
+                  }
+                },
+                child: const Text('Log in', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+}
+
+class _LoginViewLifecycleObserver extends WidgetsBindingObserver {
+  final BuildContext context;
+
+  _LoginViewLifecycleObserver(this.context);
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    logger.d(state);
+    if (state == AppLifecycleState.resumed &&
+        !onGoingBiometrics) {
+      appRouter.push(LoginRoute(resumed: true));
+    }
   }
 }

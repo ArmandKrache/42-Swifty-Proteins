@@ -18,16 +18,7 @@ import 'package:swifty_proteins/src/utils/resources/token_management.dart';
 part 'signup_state.dart';
 
 class SignupCubit extends BaseCubit<SignupState, Map<String, dynamic>> {
-  final ApiRepository _apiRepository;
-  final LocalAuthentication _localAuth = LocalAuthentication();
-  bool biometricsAvailable = false;
-
-  SignupCubit(this._apiRepository) : super(const SignupLoading(), {});
-
-  Future<void> checkBiometricsAvailability() async {
-    biometricsAvailable = await _localAuth.isDeviceSupported();
-    emit(const SignupSuccess());
-  }
+  SignupCubit() : super(const SignupLoading(), {});
 
   Future<void> signup({required String username, required String password}) async {
     if (isBusy) return;
@@ -46,12 +37,10 @@ class SignupCubit extends BaseCubit<SignupState, Map<String, dynamic>> {
     if (isBusy) return;
 
     if (biometricsAvailable) {
-      bool isAuthenticated = await _localAuth.authenticate(
-        localizedReason: 'Authenticate to sign up',
-      );
+      bool isAuthenticated = await authenticateWithBiometrics();
       if (isAuthenticated) {
-        List<BiometricType> biometricData = await _localAuth.getAvailableBiometrics();
-        logger.d(biometricData);
+        await storeCurrentUser("face_id");
+        appRouter.push(const HomepageRoute());
       }
     }
   }

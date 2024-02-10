@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:swifty_proteins/src/presentation/views/login_view.dart';
 import 'package:swifty_proteins/src/presentation/views/ligand_view.dart';
 import 'package:swifty_proteins/src/presentation/views/signup_view.dart';
+import 'package:swifty_proteins/src/presentation/views/splash_view.dart';
 part 'app_router.gr.dart';
 
 
@@ -19,7 +20,8 @@ class AppRouter extends _$AppRouter {
         CustomRoute(page: HomepageRoute.page, transitionsBuilder: TransitionsBuilders.noTransition, barrierColor: Colors.transparent),
         AutoRoute(page: LigandRoute.page),
         AutoRoute(page: Model3DRoute.page),
-        AutoRoute(page: LoginRoute.page, initial: true),
+        CustomRoute(page: LoginRoute.page, transitionsBuilder: TransitionsBuilders.noTransition, barrierColor: Colors.transparent),
+        CustomRoute(page: SplashRoute.page, initial: true, transitionsBuilder: TransitionsBuilders.noTransition, barrierColor: Colors.transparent),
         AutoRoute(page: SignUpRoute.page,),
     ];
 }

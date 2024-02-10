@@ -36,7 +36,10 @@ abstract class _$AppRouter extends RootStackRouter {
           orElse: () => const LoginRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: LoginView(key: args.key),
+        child: LoginView(
+          key: args.key,
+          resumed: args.resumed,
+        ),
       );
     },
     Model3DRoute.name: (routeData) {
@@ -55,6 +58,12 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: SignUpView(key: args.key),
+      );
+    },
+    SplashRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SplashView(),
       );
     },
   };
@@ -116,10 +125,14 @@ class LigandRouteArgs {
 class LoginRoute extends PageRouteInfo<LoginRouteArgs> {
   LoginRoute({
     Key? key,
+    bool resumed = false,
     List<PageRouteInfo>? children,
   }) : super(
           LoginRoute.name,
-          args: LoginRouteArgs(key: key),
+          args: LoginRouteArgs(
+            key: key,
+            resumed: resumed,
+          ),
           initialChildren: children,
         );
 
@@ -129,13 +142,18 @@ class LoginRoute extends PageRouteInfo<LoginRouteArgs> {
 }
 
 class LoginRouteArgs {
-  const LoginRouteArgs({this.key});
+  const LoginRouteArgs({
+    this.key,
+    this.resumed = false,
+  });
 
   final Key? key;
 
+  final bool resumed;
+
   @override
   String toString() {
-    return 'LoginRouteArgs{key: $key}';
+    return 'LoginRouteArgs{key: $key, resumed: $resumed}';
   }
 }
 
@@ -203,4 +221,18 @@ class SignUpRouteArgs {
   String toString() {
     return 'SignUpRouteArgs{key: $key}';
   }
+}
+
+/// generated route for
+/// [SplashView]
+class SplashRoute extends PageRouteInfo<void> {
+  const SplashRoute({List<PageRouteInfo>? children})
+      : super(
+          SplashRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SplashRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }

@@ -1,5 +1,12 @@
 import 'dart:developer';
+import 'dart:io';
+import 'dart:typed_data';
+import 'dart:ui' as ui;
 
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:swifty_proteins/src/config/config.dart';
 import 'package:swifty_proteins/src/config/router/app_router.dart';
 import 'package:swifty_proteins/src/data/parsing/parser.dart';
@@ -27,13 +34,13 @@ class LigandCubit extends BaseCubit<LigandState, Ligand?> {
 
   Future<void> getLigand(String id) async {
     if (isBusy) return;
-      emit(LigandLoading(ligand: ligand,));
-
+    emit(LigandLoading(ligand: ligand,));
 
     final response =
       await _apiRepository.getLigand(id);
 
     if (response is DataSuccess) {
+      //logger.d(response.data);
       ligand = parseRawData(response.data);
 
       emit(LigandSuccess(ligand: ligand,));
@@ -43,5 +50,26 @@ class LigandCubit extends BaseCubit<LigandState, Ligand?> {
       emit(LigandFailed(exception: response.exception,));
     }
     return;
+  }
+
+  Future<void> captureAndShare(GlobalKey globalKey) async {
+    emit(LigandScreenshotLoading(ligand: ligand));
+    try {
+      RenderRepaintBoundary boundary = globalKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+      ui.Image image = await boundary.toImage(pixelRatio: 3.0);
+      ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+      Uint8List pngBytes = byteData!.buffer.asUint8List();
+
+      final tempDir = await getTemporaryDirectory();
+      final file = await File('${tempDir.path}/screenshot.png').writeAsBytes(pngBytes);
+      await file.writeAsBytes(pngBytes);
+
+      XFile xfile = XFile(file.path, name: "file");
+      await Share.shareXFiles([xfile]);
+      emit(LigandScreenshotSuccess(ligand: ligand));
+    } catch (e) {
+      logger.d('Error sharing screenshot: $e');
+      emit(LigandScreenshotFailed(ligand: ligand));
+    }
   }
 }

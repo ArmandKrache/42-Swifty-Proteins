@@ -4,7 +4,6 @@ import 'package:swifty_proteins/src/config/app_colors.dart';
 import 'package:swifty_proteins/src/config/config.dart';
 import 'package:swifty_proteins/src/config/router/app_router.dart';
 import 'package:swifty_proteins/src/presentation/cubits/homepage/homepage_cubit.dart';
-import 'package:swifty_proteins/src/presentation/widgets/event_card.dart';
 import 'package:swifty_proteins/src/presentation/widgets/search_bar_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:local_auth/local_auth.dart';
 import 'package:swifty_proteins/src/config/config.dart';
 import 'package:swifty_proteins/src/config/router/app_router.dart';
 import 'package:swifty_proteins/src/data/parsing/parser.dart';
@@ -9,56 +10,51 @@ import 'package:swifty_proteins/src/domain/repositories/api_repository.dart';
 import 'package:swifty_proteins/src/presentation/cubits/base/base_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+import 'package:swifty_proteins/src/utils/resources/authentication_service.dart';
 import 'package:swifty_proteins/src/utils/resources/data_state.dart';
+import 'package:swifty_proteins/src/utils/resources/functions.dart';
 import 'package:swifty_proteins/src/utils/resources/token_management.dart';
 
 part 'login_state.dart';
 
 class LoginCubit extends BaseCubit<LoginState, Map<String, dynamic>> {
-  final ApiRepository _apiRepository;
 
-  LoginCubit(this._apiRepository) : super(const LoginSuccess(), {});
+  LoginCubit() : super(const LoginSuccess(), {});
 
-  Future<void> logIn(LoginRequest request) async {
+  Future<void> logInWithCredentials(String username, String password, {bool resumed = false}) async {
     if (isBusy) return;
-    appRouter.push(const HomepageRoute());
 
-/*
-      await run(() async {
-        final response =
-          await _apiRepository.getTokens(request: request);
-        //log(response.data!.accessToken);
-
-        if (response is DataSuccess) {
-          final access = response.data!.accessToken;
-
-          await storeAccessToken(access);
-
-          appRouter.push(const HomepageRoute());
-          emit(const LoginSuccess());
-        } else if (response is DataFailed) {
-          emit(const LoginLoading());
-          emit(LoginFailed(exception: response.exception));
-        }
-      });*/
+    bool credentialsOK = await checkCredentials(username, password);
+    if (credentialsOK) {
+      if (resumed && appRouter.canPop()) {
+        appRouter.pop();
+      } else {
+        appRouter.push(const HomepageRoute());
+      }
+    } else {
+      displayErrorToast("Given Credentials are incorrect");
+    }
   }
 
-  /*
-  Future<void> isAlreadyLoggedIn() async {
-    final response =
-      await _apiRepository.getTokenInfo();
-    if (response is DataSuccess) {
-      final expiresIn = response.data!.expiresIn;
+  Future<bool> loginWithBiometrics({bool resumed = false}) async {
+    if (isBusy) return false;
 
-      if (expiresIn > 0) {
-        appRouter.push(const HomepageRoute());
-        emit(const LoginSuccess());
-      } else {
-        emit(const LoginSuccess());
+    try {
+      if (biometricsAvailable) {
+        bool isAuthenticated = await authenticateWithBiometrics();
+        if (isAuthenticated) {
+          await storeCurrentUser("face_id");
+          if (resumed && appRouter.canPop()) {
+            appRouter.pop();
+          } else {
+            appRouter.push(const HomepageRoute());
+          }
+          return true;
+        }
       }
-    } else if (response is DataFailed) {
-      emit(const LoginLoading());
-      emit(LoginFailed(exception: response.exception));
+    } catch (e) {
+      logger.d(e);
     }
-  }*/
+    return false;
+  }
 }

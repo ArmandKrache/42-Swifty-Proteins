@@ -19,6 +19,8 @@ void main() async {
 
   await initializeDependencies();
 
+  await checkBiometricsAvailability();
+
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -42,11 +44,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => HomepageCubit(
           locator<ApiRepository>(),),
         ),
-        BlocProvider(create: (context) => LoginCubit(
-          locator<ApiRepository>(),),
+        BlocProvider(create: (context) => LoginCubit(),
         ),
-        BlocProvider(create: (context) => SignupCubit(
-          locator<ApiRepository>(),),
+        BlocProvider(create: (context) => SignupCubit(),
         ),
         BlocProvider(create: (context) => LigandCubit(
           locator<ApiRepository>(),),

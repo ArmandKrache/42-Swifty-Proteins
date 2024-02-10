@@ -1,37 +1,26 @@
 import 'package:flutter_gl/flutter_gl.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:logger/logger.dart';
 
 const storage = FlutterSecureStorage();
 final logger = Logger();
 
-Future<void> initGL() async {
-  int width = 200;
-  int height = 200;
-  num dpr = 1.0;
+final LocalAuthentication localAuth = LocalAuthentication();
+bool biometricsAvailable = false;
+bool onGoingBiometrics = false;
 
-  FlutterGlPlugin flutterGlPlugin = FlutterGlPlugin();
+Future<void> checkBiometricsAvailability() async {
+  biometricsAvailable = await localAuth.isDeviceSupported();
+}
 
-  Map<String, dynamic> _options = {
-    "width": width,
-    "height": height,
-    "dpr": dpr,
-    "antialias": true,
-    "alpha": false
-  };
-  await flutterGlPlugin.initialize(options: _options);
-
-// on web this need called after web canvas dom was added to document
-  await flutterGlPlugin.prepareContext();
-
-// you can get gl by
-  dynamic gl = flutterGlPlugin.gl;
-
-// then you can call OpenGL ES API by gl like
-  gl.clearColor(0.0, 0.0, 0.0, 1.0);
-  gl.clear(gl.COLOR_BUFFER_BIT);
-
-// use this method to notify Flutter update Texture Widget
-// sourceTextue is a texture which bind to FBO framebuffer
-  ///flutterGlPlugin.updateTexture(sourceTexture);
+Future<bool> authenticateWithBiometrics() async {
+  onGoingBiometrics = true;
+  bool isAuthenticated = await localAuth.authenticate(
+    localizedReason: 'Authenticate to sign up',
+  );
+  Future.delayed(const Duration(seconds: 2), () {
+    onGoingBiometrics = false;
+  });
+  return isAuthenticated;
 }

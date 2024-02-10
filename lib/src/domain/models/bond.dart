@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:swifty_proteins/src/domain/models/position.dart';
 
 class Bond extends Equatable {
   final int atom1;

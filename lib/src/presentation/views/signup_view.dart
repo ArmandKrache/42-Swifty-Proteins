@@ -33,7 +33,6 @@ class SignUpView extends HookWidget {
     final signupCubit = BlocProvider.of<SignupCubit>(context);
 
     useEffect(() {
-      signupCubit.checkBiometricsAvailability();
       return ;
     }, const []);
 
@@ -153,51 +152,6 @@ class SignUpView extends HookWidget {
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildBody(BuildContext context, LoginCubit remoteLoginCubit, DioException? error) {
-    return Stack(
-      children: [
-        SafeArea(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                const Expanded(child: SizedBox()),
-                Text(tr("app_name_caps"),
-                  style: const TextStyle(color: Colors.black87, fontSize: 22, fontWeight: FontWeight.bold),
-                ),
-                const Expanded(flex: 3, child: SizedBox()),
-                TextButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.pink),
-                    textStyle: MaterialStateProperty.all(const TextStyle(color: Colors.white)),
-                    padding: MaterialStateProperty.all(const EdgeInsets.symmetric(vertical: 8, horizontal: 16)),
-                  ),
-                  onPressed: () {
-                    remoteLoginCubit.logIn(LoginRequest(client_id: "", client_secret: ""));
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    child: Text(tr("log_in"),
-                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 8),
-                  child: Center(
-                    child: Text(error == null ? "" : error.response?.data.toString() ?? "",
-                      style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold, fontSize: 16),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ],
     );
   }
 }
