@@ -4,6 +4,7 @@ import 'package:swifty_proteins/src/config/app_colors.dart';
 import 'package:swifty_proteins/src/config/config.dart';
 import 'package:swifty_proteins/src/config/router/app_router.dart';
 import 'package:swifty_proteins/src/presentation/cubits/homepage/homepage_cubit.dart';
+import 'package:swifty_proteins/src/presentation/widgets/options_dialog.dart';
 import 'package:swifty_proteins/src/presentation/widgets/search_bar_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -56,20 +57,24 @@ class HomepageView extends HookWidget {
           Padding(
             padding: const EdgeInsets.only(right: 16),
             child: GestureDetector(
-              onTap: () {
-                homepageCubit.logOut();
+              onTap: () async {
+                logger.d(context.locale.languageCode);
+                await showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return OptionsDialog(
+                      logout: () {
+                        homepageCubit.logOut();
+                      },
+                    );
+                  },
+                );
               },
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Container(
                   padding: const EdgeInsets.all(4),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(Icons.logout_outlined, color: AppColors.alert,),
-                      Text(tr("login.logout"), style: const TextStyle(fontSize: 11, color: AppColors.alert),)
-                    ],
-                  ),
+                  child: const Icon(Icons.settings, color: Colors.black54,),
                 ),
               ),
             ),

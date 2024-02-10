@@ -17,5 +17,10 @@
   "errors" : {
     "incorrect_credentials" : "Given Credentials are incorrect",
     "username_is_taken" : "Username is already taken"
+  },
+  "options" : {
+    "options" : "Options",
+    "language" : "Language",
+    "close" : "Close"
   }
 }

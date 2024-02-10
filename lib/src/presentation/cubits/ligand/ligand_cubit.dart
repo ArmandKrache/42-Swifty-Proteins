@@ -15,6 +15,7 @@ import 'package:swifty_proteins/src/presentation/cubits/base/base_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:swifty_proteins/src/utils/resources/data_state.dart';
+import 'package:swifty_proteins/src/utils/resources/functions.dart';
 
 part 'ligand_state.dart';
 
@@ -34,10 +35,13 @@ class LigandCubit extends BaseCubit<LigandState, Ligand?> {
 
     if (response is DataSuccess) {
       //logger.d(response.data);
-      ligand = parseRawData(response.data);
-
-      emit(LigandSuccess(ligand: ligand,));
-
+      try {
+        ligand = parseRawData(response.data);
+        emit(LigandSuccess(ligand: ligand,));
+      } catch (e) {
+        displayErrorToast("An Error occurred during data parsing");
+        emit(LigandFailed(exception: response.exception,));
+      }
     } else if (response is DataFailed) {
       logger.d(response.exception);
       emit(LigandFailed(exception: response.exception,));

@@ -79,7 +79,7 @@ class LoginView extends HookWidget with WidgetsBindingObserver {
                   },
                   child: Container(
                       padding: const EdgeInsets.all(8),
-                      child: Text(tr("log_in"),
+                      child: Text(tr("login.login"),
                         style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
                       ),
                   ),
@@ -185,7 +185,6 @@ class _LoginViewLifecycleObserver extends WidgetsBindingObserver {
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    logger.d(state);
     if (state == AppLifecycleState.resumed &&
         !onGoingBiometrics) {
       appRouter.push(LoginRoute(resumed: true));

@@ -45,3 +45,4 @@ app.*.map.json
 
 .secret.dart
 test*.json
+script/files/

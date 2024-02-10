@@ -41,6 +41,7 @@ class LigandView extends HookWidget {
       body: BlocBuilder<LigandCubit, LigandState>(
           builder: (context, state) {
             if (state.runtimeType == LigandFailed) {
+              appRouter.pop();
               return Center(
                 heightFactor: 50,
                 child: Text(tr("errors.student_not_loaded")),
@@ -52,7 +53,6 @@ class LigandView extends HookWidget {
                   child: Center(child: CupertinoActivityIndicator())
               );
             } else {
-              logger.d(state.ligand!.atoms);
               return Stack(
                 children: [
                   RepaintBoundary(

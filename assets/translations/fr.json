@@ -17,5 +17,10 @@
   "errors" : {
     "incorrect_credentials" : "Le Nom d'utilisateur ou le mot de passe sont incorrect",
     "username_is_taken" : "Le nom d'utilisateur est déjà pris."
+  },
+  "options" : {
+    "options" : "Options",
+    "language" : "Langage",
+    "close" : "Fermer"
   }
 }

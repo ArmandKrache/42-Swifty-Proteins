@@ -3,13 +3,11 @@ import 'package:three_dart/three_dart.dart' as three;
 
 
 class Atom extends Equatable {
-  //final Position position;
   final String element;
   final three.Vector3 position;
 
 
   const Atom({
-    //required this.position,
     required this.element,
     required this.position,
   });
