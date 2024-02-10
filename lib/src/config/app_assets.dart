@@ -1,5 +1,3 @@
-import 'package:swifty_proteins/src/config/app_colors.dart';
-import 'package:swifty_proteins/src/domain/models/coalition/coalition.dart';
 
 class AppAssets {
   static const String testFileHEM = "assets/files/HEM.sdf";

@@ -1,53 +1,21 @@
 {
   "app_name" : "Swifty proteins",
   "app_name_caps" : "SWIFTY PROTEINS",
-  "log_in" : "Se connecter",
   "homepage" : {
     "logout" : "Se déconnecter",
-    "filter_by_name" : "Filtrer par nom",
-    "events" : "Événements"
+    "filter_by_name" : "Filtrer par nom"
   },
-  "student" : {
-    "wallet" : "Wallet",
-    "evaluation_points" : "Points de correction",
-    "projects" : "Projets",
-    "contact" : "Contact",
-    "skills" : "Compétences",
-    "email" : "Email",
-    "phone" : "Phone",
-    "level" : "Niveau",
-    "unavailable": "Indisponible"
-  },
-  "coalitions" : {
-    "coalitions" : "Coalitions",
-    "order" : "The Order",
-    "federation" : "The Federation",
-    "alliance" : "The Alliance",
-    "assembly" : "The Assembly",
-    "score" : "Score"
-  },
-  "projects" : {
-    "finished" : "Validé",
-    "in_progress": "En cours",
-    "waiting_for_correction" : "En attente de correction",
-    "failed" : "Échoué",
-    "searching_a_group" : "En recherche de groupe"
+  "login" : {
+    "biometrics_hint": "S'authentifier pour continuer",
+    "login": "Se connecter",
+    "logout": "Se déconnecter",
+    "signup": "S'inscrire",
+    "connect_with_password": "Connexion avec mot de passe",
+    "username" : "Nom d'utilisateur",
+    "password" : "Mot de passe"
   },
   "errors" : {
-    "0_results_for_given_query" : "0 résultats pour la requête",
-    "student_not_loaded" : "Le chargement des données de l'étudiant à échoué.",
-    "no_data_found" : "Aucune donnée trouvée"
-  },
-  "events" : {
-    "association" : "Association",
-    "event" : "Événement",
-    "extern" : "Externe",
-    "partnership" : "Partenariat"
-  },
-  "utils" : {
-    "Search" : "Rechercher",
-    "minutes" : "minutes",
-    "hour" : "heure",
-    "hours" : "heures"
+    "incorrect_credentials" : "Le Nom d'utilisateur ou le mot de passe sont incorrect",
+    "username_is_taken" : "Le nom d'utilisateur est déjà pris."
   }
 }

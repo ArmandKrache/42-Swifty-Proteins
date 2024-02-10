@@ -1,24 +1,17 @@
-import 'dart:io';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:swifty_proteins/src/config/app_assets.dart';
 import 'package:swifty_proteins/src/config/app_colors.dart';
 import 'package:swifty_proteins/src/config/config.dart';
 import 'package:swifty_proteins/src/config/router/app_router.dart';
-import 'package:swifty_proteins/src/data/parsing/parser.dart';
-import 'package:swifty_proteins/src/domain/models/ligand/ligand.dart';
-import 'package:swifty_proteins/src/domain/models/login_request.dart';
 import 'package:swifty_proteins/src/presentation/cubits/login/login_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:lottie/lottie.dart';
-import 'package:three_dart/three3d/extras/core/ttf_font.dart';
 
 @RoutePage()
 class LoginView extends HookWidget with WidgetsBindingObserver {
@@ -98,9 +91,9 @@ class LoginView extends HookWidget with WidgetsBindingObserver {
                   },
                   child: Container(
                     margin: const EdgeInsets.only(top: 8),
-                    child: const Center(
-                      child: Text("Sign up",
-                        style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold, fontSize: 16),
+                    child: Center(
+                      child: Text(tr("login.signup"),
+                        style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold, fontSize: 16),
                       ),
                     ),
                   ),
@@ -132,7 +125,7 @@ class LoginView extends HookWidget with WidgetsBindingObserver {
         builder: (context) {
           return AlertDialog(
             backgroundColor: Colors.white,
-            title: const Text('Connect with password', style: TextStyle(fontSize: 14),),
+            title: Text(tr("login.connect_with_password"), style: const TextStyle(fontSize: 14),),
             content: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
@@ -141,14 +134,14 @@ class LoginView extends HookWidget with WidgetsBindingObserver {
                 TextField(
                   controller: usernameController,
                   cursorColor: Colors.deepPurple,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    focusedBorder: OutlineInputBorder(
+                  decoration: InputDecoration(
+                    border: const OutlineInputBorder(),
+                    focusedBorder: const OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.deepPurple, style: BorderStyle.solid, width: 1.5)
                     ),
                     fillColor: Colors.white,
                     filled: true,
-                    hintText: 'Username',
+                    hintText: tr('login.username'),
                   ),
                 ),
                 const SizedBox(height: 16,),
@@ -156,14 +149,14 @@ class LoginView extends HookWidget with WidgetsBindingObserver {
                   controller: passwordController,
                   cursorColor: Colors.deepPurple,
                   obscureText: true,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    focusedBorder: OutlineInputBorder(
+                  decoration: InputDecoration(
+                    border: const OutlineInputBorder(),
+                    focusedBorder: const OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.deepPurple, style: BorderStyle.solid, width: 1.5)
                     ),
                     fillColor: Colors.white,
                     filled: true,
-                    hintText: 'Password',
+                    hintText: tr('login.password'),
                   ),
                 ),
               ],
@@ -175,7 +168,7 @@ class LoginView extends HookWidget with WidgetsBindingObserver {
                     loginCubit.logInWithCredentials(usernameController.text, passwordController.text, resumed: resumed);
                   }
                 },
-                child: const Text('Log in', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                child: Text(tr("login.login"), style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
               ),
             ],
           );

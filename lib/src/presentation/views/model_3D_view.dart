@@ -340,6 +340,7 @@ class _Model3DViewState extends State<Model3DView> {
 
 // Function to display a hint for the tapped atom
   void _displayAtomHint(Atom atom) {
+    //TODO: Add more Atoms details
     showDialog(
       context: context,
       builder: (BuildContext context) {

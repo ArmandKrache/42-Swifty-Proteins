@@ -1,15 +1,6 @@
-import 'dart:convert';
-import 'dart:io';
-
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:swifty_proteins/src/config/app_assets.dart';
-import 'package:swifty_proteins/src/config/app_themes.dart';
-import 'package:swifty_proteins/src/config/config.dart';
-import 'package:swifty_proteins/src/config/router/app_router.dart';
 import 'package:swifty_proteins/src/domain/models/ligand/ligand.dart';
-import 'package:swifty_proteins/src/locator.dart';
 
 
 Future<List<String>> parseLigandNamesFile() async {

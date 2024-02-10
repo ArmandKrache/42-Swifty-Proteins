@@ -63,11 +63,11 @@ class HomepageView extends HookWidget {
                 alignment: Alignment.centerRight,
                 child: Container(
                   padding: const EdgeInsets.all(4),
-                  child: const Column(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.logout_outlined, color: AppColors.alert,),
-                      Text("logout", style: TextStyle(fontSize: 11, color: AppColors.alert),)
+                      const Icon(Icons.logout_outlined, color: AppColors.alert,),
+                      Text(tr("login.logout"), style: const TextStyle(fontSize: 11, color: AppColors.alert),)
                     ],
                   ),
                 ),
@@ -135,9 +135,6 @@ class HomepageView extends HookWidget {
     return GestureDetector(
       onTap: () {
         appRouter.push(LigandRoute(ligandId: name));
-
-        ///appRouter.push(WebGlCameraRoute(fileName: ''));
-
       },
       child: Container(
         width: 64,

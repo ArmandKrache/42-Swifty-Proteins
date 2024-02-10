@@ -1,53 +1,21 @@
 {
   "app_name" : "Swifty proteins",
   "app_name_caps" : "SWIFTY PROTEINS",
-  "log_in" : "Log in",
   "homepage" : {
     "logout" : "Logout",
-    "filter_by_name" : "Filter by name",
-    "events" : "Events"
+    "filter_by_name" : "Filter by name"
   },
-  "student" : {
-    "wallet" : "Wallet",
-    "evaluation_points" : "Evaluation points",
-    "projects" : "Projects",
-    "contact" : "Contact",
-    "skills" : "Skills",
-    "email" : "Email",
-    "phone" : "Phone",
-    "level" : "Level",
-    "unavailable": "Unavailable"
-  },
-  "coalitions" : {
-    "coalitions" : "Coalitions",
-    "order" : "The Order",
-    "federation" : "The Federation",
-    "alliance" : "The Alliance",
-    "assembly" : "The Assembly",
-    "score" : "Score"
-  },
-  "projects" : {
-    "finished" : "Finished",
-    "in_progress": "In progress",
-    "waiting_for_correction" : "Waiting for correction",
-    "failed" : "Failed",
-    "searching_a_group" : "Searching for a group"
+  "login" : {
+    "biometrics_hint": "Authenticate to sign up",
+    "login": "Log in",
+    "logout": "Logout",
+    "signup": "Sign up",
+    "connect_with_password": "Connect with password",
+    "username" : "Username",
+    "password" : "Password"
   },
   "errors" : {
-    "0_results_for_given_query" : "0 results for the given query",
-    "student_not_loaded" : "Student couldn't be loaded",
-    "no_data_found" : "No Data found"
-  },
-  "events" : {
-    "association" : "Association",
-    "event" : "Event",
-    "extern" : "Extern",
-    "partnership" : "Partnership"
-  },
-  "utils" : {
-    "Search" : "Search",
-    "minutes" : "minutes",
-    "hour" : "hour",
-    "hours" : "hours"
+    "incorrect_credentials" : "Given Credentials are incorrect",
+    "username_is_taken" : "Username is already taken"
   }
 }

@@ -1,23 +1,12 @@
-import 'dart:io';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:swifty_proteins/src/config/app_assets.dart';
-import 'package:swifty_proteins/src/config/app_colors.dart';
-import 'package:swifty_proteins/src/config/config.dart';
-import 'package:swifty_proteins/src/config/router/app_router.dart';
-import 'package:swifty_proteins/src/data/parsing/parser.dart';
-import 'package:swifty_proteins/src/domain/models/ligand/ligand.dart';
-import 'package:swifty_proteins/src/domain/models/login_request.dart';
 import 'package:swifty_proteins/src/presentation/cubits/login/login_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:lottie/lottie.dart';
 import 'package:swifty_proteins/src/presentation/cubits/signup/signup_cubit.dart';
 
 @RoutePage()
@@ -38,7 +27,7 @@ class SignUpView extends HookWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Sign Up"),
+        title: Text(tr("login.signup")),
       ),
       body: BlocBuilder<SignupCubit, SignupState>(
         builder: (context, state) {
@@ -67,14 +56,14 @@ class SignUpView extends HookWidget {
                 TextField(
                   controller: usernameController,
                   cursorColor: Colors.deepPurple,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    focusedBorder: OutlineInputBorder(
+                  decoration: InputDecoration(
+                    border: const OutlineInputBorder(),
+                    focusedBorder: const OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.deepPurple, style: BorderStyle.solid, width: 1.5)
                     ),
                     fillColor: Colors.white,
                     filled: true,
-                    hintText: 'Username',
+                    hintText: tr("login.username"),
                   ),
                 ),
                 const SizedBox(height: 16,),
@@ -82,14 +71,14 @@ class SignUpView extends HookWidget {
                   controller: passwordController,
                   cursorColor: Colors.deepPurple,
                   obscureText: true,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    focusedBorder: OutlineInputBorder(
+                  decoration: InputDecoration(
+                    border: const OutlineInputBorder(),
+                    focusedBorder: const OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.deepPurple, style: BorderStyle.solid, width: 1.5)
                     ),
                     fillColor: Colors.white,
                     filled: true,
-                    hintText: 'Password',
+                    hintText: tr("login.password"),
                   ),
                 ),
                 const SizedBox(height: 16,),
@@ -101,49 +90,13 @@ class SignUpView extends HookWidget {
                   ),
                   onPressed: () async {
                     if (usernameController.text != "" && passwordController.text != "") {
-                      /**if (signupCubit.biometricsAvailable) {
-                        await showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              backgroundColor: Colors.white,
-                              content: Container(
-                                padding: const EdgeInsets.all(16),
-                                child: const Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text("Do you want to register using biometrics authentication?",
-                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    appRouter.pop();
-                                  },
-                                  child: const Text('No'),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    appRouter.pop();
-                                  },
-                                  child: const Text('Yes'),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      }**/
                       signupCubit.signup(username: usernameController.text, password: passwordController.text);
                     }
                   },
                   child: Container(
                     padding: const EdgeInsets.all(8),
-                    child: const Text("Sign Up",
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                    child: Text(tr("login.signup"),
+                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
                     ),
                   ),
                 ),
