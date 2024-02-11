@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:path_provider/path_provider.dart';
@@ -39,11 +40,12 @@ class LigandCubit extends BaseCubit<LigandState, Ligand?> {
         ligand = parseRawData(response.data);
         emit(LigandSuccess(ligand: ligand,));
       } catch (e) {
-        displayErrorToast("An Error occurred during data parsing");
+        displayErrorToast(tr("errors.ligand_parse_failed"));
         emit(LigandFailed(exception: response.exception,));
       }
     } else if (response is DataFailed) {
       logger.d(response.exception);
+      displayErrorToast(tr("errors.ligand_fetch_failed"));
       emit(LigandFailed(exception: response.exception,));
     }
     return;
@@ -66,6 +68,7 @@ class LigandCubit extends BaseCubit<LigandState, Ligand?> {
       emit(LigandScreenshotSuccess(ligand: ligand));
     } catch (e) {
       logger.d('Error sharing screenshot: $e');
+      displayErrorToast(tr("errors.sharing_screenshot_error"));
       emit(LigandScreenshotFailed(ligand: ligand));
     }
   }

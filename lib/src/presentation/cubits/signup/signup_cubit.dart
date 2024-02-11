@@ -28,7 +28,7 @@ class SignupCubit extends BaseCubit<SignupState, Map<String, dynamic>> {
     return;
   }
 
-  Future<void> signupWithBiometrics({required String username, required String password, bool biometrics = false}) async {
+  Future<void> signupWithBiometrics() async {
     if (isBusy) return;
 
     if (biometricsAvailable) {
@@ -36,6 +36,8 @@ class SignupCubit extends BaseCubit<SignupState, Map<String, dynamic>> {
       if (isAuthenticated) {
         await storeCurrentUser("face_id");
         appRouter.push(const HomepageRoute());
+      } else {
+        displayErrorToast(tr("errors.biometrics_signup_failed"));
       }
     }
   }

@@ -47,7 +47,7 @@ class LigandView extends HookWidget {
                 child: Text(tr("errors.student_not_loaded")),
               );
             } else
-            if (state.runtimeType == LigandLoading && state.ligand == null) {
+            if (state.runtimeType == LigandLoading || state.ligand == null) {
               return const Center(
                   heightFactor: 50,
                   child: Center(child: CupertinoActivityIndicator())

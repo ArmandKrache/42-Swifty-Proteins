@@ -2,6 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:swifty_proteins/src/config/app_colors.dart';
+import 'package:swifty_proteins/src/config/config.dart';
+import 'package:swifty_proteins/src/config/router/app_router.dart';
 import 'package:swifty_proteins/src/presentation/cubits/login/login_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -97,6 +100,23 @@ class SignUpView extends HookWidget {
                     padding: const EdgeInsets.all(8),
                     child: Text(tr("login.signup"),
                       style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16,),
+                Visibility(
+                  visible: biometricsAvailable,
+                  child: GestureDetector(
+                    onTap: () {
+                      signupCubit.signupWithBiometrics();
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(top: 8),
+                      child: Center(
+                        child: Text(tr("login.signup_with_biometrics"),
+                          style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold, fontSize: 16),
+                        ),
+                      ),
                     ),
                   ),
                 ),

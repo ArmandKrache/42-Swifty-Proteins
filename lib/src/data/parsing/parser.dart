@@ -1,15 +1,22 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/services.dart';
 import 'package:swifty_proteins/src/config/app_assets.dart';
 import 'package:swifty_proteins/src/domain/models/ligand/ligand.dart';
+import 'package:swifty_proteins/src/utils/resources/functions.dart';
 
 
 Future<List<String>> parseLigandNamesFile() async {
 
-  String content = await rootBundle.loadString(AppAssets.ligandsNames);
+  try {
+    String content = await rootBundle.loadString(AppAssets.ligandsNames);
 
-  List<String> ligands = content.trim().split('\n');
+    List<String> ligands = content.trim().split('\n');
 
-  return ligands;
+    return ligands;
+  } catch (e) {
+    displayErrorToast(tr("errors.ligands_list_parsing"));
+    return [];
+  }
 
 }
 

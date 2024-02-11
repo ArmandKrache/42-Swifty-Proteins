@@ -12,15 +12,47 @@
     "signup": "S'inscrire",
     "connect_with_password": "Connexion avec mot de passe",
     "username" : "Nom d'utilisateur",
-    "password" : "Mot de passe"
+    "password" : "Mot de passe",
+    "signup_with_biometrics" : "Utiliser la reconnaissance biométrique"
   },
   "errors" : {
+    "ligands_list_parsing" : "Erreur: Impossible de récupérer la liste des ligands.",
     "incorrect_credentials" : "Le Nom d'utilisateur ou le mot de passe sont incorrect",
-    "username_is_taken" : "Le nom d'utilisateur est déjà pris."
+    "username_is_taken" : "Le nom d'utilisateur est déjà pris.",
+    "biometrics_signup_failed" : "L'inscription biométrique a échouée.",
+    "biometrics_login_failed" : "La connexion biométriques a échouée.",
+    "ligand_fetch_failed" : "Erreur: La récupération des données a échouée. Merci de vérifier votre connexion.",
+    "ligand_parse_failed" : "Erreur: Le parsing des données a échoué.",
+    "sharing_screenshot_error" : "Erreur: Le partage a échoué."
   },
   "options" : {
     "options" : "Options",
-    "language" : "Langage",
+    "language" : "Langue",
     "close" : "Fermer"
+  },
+  "elements" : {
+    "C": "Carbone",
+    "O": "Oxygène",
+    "N": "Azote",
+    "H": "Hydrogène",
+    "S": "Soufre",
+    "Br": "Brome",
+    "Cl": "Chlore",
+    "B": "Bore",
+    "F": "Fluor",
+    "P": "Phosphore",
+    "descriptions" : {
+      "no_description" : "Il n'y a pas de description pour cet élément chimique.",
+      "H" : "L'hydrogène est l'élément chimique de numéro atomique 1, de symbole H. L'hydrogène présent sur Terre est presque entièrement constitué de l'isotope 1H (ou protium, comportant un proton et zéro neutron) et d'environ 0,01 % de deutérium 2H (un proton, un neutron). Ces deux isotopes de l'hydrogène sont stables. Un troisième isotope, le tritium 3H (un proton, deux neutrons), instable, est produit dans les réactions de fission nucléaire (réacteurs nucléaires ou bombes).",
+      "C" : "Le carbone est l'élément le plus léger du groupe 14 du tableau périodique. Le corps simple carbone présente plusieurs formes allotropiques dont principalement le graphite et le diamant. L'élément carbone forme divers composés inorganiques comme le dioxyde de carbone CO2, et une grande variété de composés organiques et de polymères. C'est l'élément de base de toutes les formes de vie connues.",
+      "N" : "L'azote est l'élément chimique de numéro atomique 7, de symbole N (du latin nitrogenium). C'est la tête de file du groupe des pnictogènes. Dans la langue courante on appelle « azote » le corps simple N2 (diazote), constituant majoritaire de l'atmosphère terrestre, représentant presque les 4/5e de l'air (78,06 %, en volume).",
+      "O" : "L'oxygène est l'élément chimique de numéro atomique 8, de symbole O. C'est la tête de file du groupe des chalcogènes, souvent appelé groupe de l'oxygène. Découvert indépendamment en 1772 par le Suédois Carl Wilhelm Scheele à Uppsala, et en 1774 par Pierre Bayen à Châlons-en-Champagne ainsi que par le Britannique Joseph Priestley dans le Wiltshire, l'oxygène a été nommé ainsi en 1777 par le Français Antoine Lavoisier du grec ancien ὀξύς / oxús (« aigu », c'est-à-dire ici « acide »), et γενής / genḗs (« générateur »), car Lavoisier pensait à tort que oxydation et acidification étaient reliées",
+      "P" : "Le phosphore (du grec ancien φωσφόρος phōsphóros, en français 'porteur de lumière', par allusion à la chimiluminescence émanant du phosphore blanc, visible dans l'obscurité quand il est exposé à de l'oxygène) est l'élément chimique de numéro atomique 15, de symbole P. Dans le tableau périodique, il se trouve dans le cinquième groupe principal, ou 15e groupe IUPAC ou groupe azote. C'est un membre du groupe des pnictogènes.",
+      "S" : "Le soufre est l'élément chimique de numéro atomique 16, de symbole S. C'est un membre du groupe des chalcogènes.\nC'est un non-métal multivalent abondant, insipide, et insoluble dans l'eau. Le soufre est surtout connu sous la forme de cristaux jaunes et se trouve dans beaucoup de minéraux (sulfures et sulfates) et même sous forme native, particulièrement dans les régions volcaniques. L'essentiel du soufre exploité est cependant d'origine sédimentaire.",
+      "Br" : "Le brome est l'élément chimique de numéro atomique 35, de symbole Br. C'est un membre de la famille des halogènes.\n\nLe corps simple brome, de formule chimique Br2 (dibrome, formé de molécules homonucléaires diatomiques), est un liquide de couleur brunâtre dans les conditions normales de température et de pression. Carl Löwig et Antoine-Jérôme Balard ont découvert ce corps simple en 1825 et 1826, indépendamment l'un de l'autre. Son nom dérive du grec bromos (« puanteur »), en raison de son odeur piquante.",
+      "Cl" : "Le chlore est l'élément chimique de numéro atomique 17, de symbole Cl. C'est le plus commun des halogènes.\n\nLe chlore est abondant dans la nature, son dérivé le plus important est le sel de table ou chlorure de sodium (NaCl). Ce dernier est nécessaire à de nombreuses formes de vie.\n\nLe chlore, à l'état de corps simple, se présente sous la forme de la molécule de dichlore Cl2, qui est un gaz jaune-vert 2,5 fois plus dense que l'air, aux conditions normales de température et de pression. Ce gaz a une odeur suffocante très désagréable et est extrêmement toxique.",
+      "F" : "Le fluor est l'élément chimique de numéro atomique 9, de symbole F. C'est le premier élément du groupe des halogènes. Le corps simple correspondant est le difluor (constitué de molécules F2), souvent appelé simplement fluor.\n\nLe seul isotope stable est 19F. Le radioisotope le moins instable est 18F, dont la demi-vie est d'un peu moins de 2 h et qui se transmute en oxygène 18 (dans 97 % des cas par désintégration β+ et sinon par capture électronique).",
+      "B" : "Le bore est l'élément chimique de numéro atomique 5, de symbole B. C'est la tête de file du groupe 13 du tableau périodique.\n\nIl fait partie, avec le lithium et le béryllium, des quelques éléments légers absents des principaux processus de nucléosynthèse (nucléosynthèse primordiale et nucléosynthèse stellaire). La présence du bore, en faible abondance, dans l'espace est imputable à la spallation cosmique (bombardement interstellaire d'éléments plus lourds par les rayons cosmiques)."
+    }
   }
 }

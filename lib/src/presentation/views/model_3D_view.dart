@@ -3,6 +3,8 @@ import 'dart:io';
 import 'dart:ui' as ui;
 
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -10,6 +12,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_gl/flutter_gl.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:swifty_proteins/src/config/app_colors.dart';
+import 'package:swifty_proteins/src/config/app_strings.dart';
 import 'package:swifty_proteins/src/config/router/app_router.dart';
 import 'package:swifty_proteins/src/domain/models/atom.dart';
 import 'package:swifty_proteins/src/domain/models/bond.dart';
@@ -141,16 +144,16 @@ class _Model3DViewState extends State<Model3DView> {
             return Container(
                 width: double.maxFinite,
                 height: double.maxFinite,
-                color: Colors.black,
+                color: const Color(0x00cccccc),
                 child: Builder(builder: (BuildContext context) {
                   if (kIsWeb) {
                     return three3dRender.isInitialized
                         ? HtmlElementView(viewType: three3dRender.textureId!.toString())
-                        : Container();
+                        : const Center(child: CupertinoActivityIndicator());
                   } else {
                     return three3dRender.isInitialized
                         ? Texture(textureId: three3dRender.textureId!)
-                        : Container();
+                        : const Center(child: CupertinoActivityIndicator());
                   }
                 }));
           }),
@@ -261,7 +264,7 @@ class _Model3DViewState extends State<Model3DView> {
 
       var distance = atom1.position.distanceTo(atom2.position);
 
-      //TODO: make different meshes depending on the bond type
+      //TODO Bonus : make different meshes depending on the bond type
       var geometryBonds = three.CylinderGeometry(0.05, 0.05, distance);
 
       // Create mesh
@@ -338,22 +341,32 @@ class _Model3DViewState extends State<Model3DView> {
     return null;
   }
 
-// Function to display a hint for the tapped atom
   void _displayAtomHint(Atom atom) {
-    //TODO: Add more Atoms details
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: Colors.white,
-          title: Text('Atom Details'),
-          content: Text('Element: ${atom.element}\nPosition: (${atom.position.x}, ${atom.position.y}, ${atom.position.z})'),
+          content: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Center(child: Text("${ElementsString.getElementName(atom.element)} (${atom.element})",
+                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold))
+                ),
+                const SizedBox(height: 8,),
+                Text(ElementsString.getElementDetails(atom.element)),
+              ],
+            ),
+          ),
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                appRouter.pop();
               },
-              child: Text('Close'),
+              child: Text(tr("options.close")),
             ),
           ],
         );

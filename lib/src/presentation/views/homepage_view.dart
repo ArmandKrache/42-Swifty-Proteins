@@ -58,7 +58,6 @@ class HomepageView extends HookWidget {
             padding: const EdgeInsets.only(right: 16),
             child: GestureDetector(
               onTap: () async {
-                logger.d(context.locale.languageCode);
                 await showDialog(
                   context: context,
                   builder: (BuildContext context) {

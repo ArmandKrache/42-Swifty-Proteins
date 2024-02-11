@@ -42,10 +42,13 @@ class LoginCubit extends BaseCubit<LoginState, Map<String, dynamic>> {
             appRouter.push(const HomepageRoute());
           }
           return true;
+        } else {
+          displayErrorToast(tr("errors.biometrics_login_failed"));
         }
       }
     } catch (e) {
       logger.d(e);
+      displayErrorToast("${tr("errors.biometrics_login_failed")} : $e");
     }
     return false;
   }

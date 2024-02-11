@@ -41,36 +41,43 @@ class _OptionsDialogState extends State<OptionsDialog> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(tr("options.language")),
-              Switch(
-                value: isFrench,
-                onChanged: (value) {
-                  if (value == true) {
-                    changeLocale(const Locale("fr"));
-                  } else {
-                    changeLocale(const Locale("en"));
-                  }
-                }
+              Text(tr("options.language"), style: const TextStyle(fontSize: 15),),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Text("🇺🇸", style: TextStyle(fontSize: 24),),
+                  Switch(
+                    inactiveTrackColor: Colors.grey,
+                    hoverColor: Colors.white,
+                    focusColor: Colors.white,
+                    thumbColor: MaterialStateProperty.all(Colors.white),
+                    value: isFrench,
+                    onChanged: (value) {
+                      if (value == true) {
+                        changeLocale(const Locale("fr"));
+                      } else {
+                        changeLocale(const Locale("en"));
+                      }
+                    }
+                  ),
+                  const Text("🇫🇷", style: TextStyle(fontSize: 24),),
+                ],
               ),
             ],
           ),
+          const SizedBox(height: 8),
+          const Divider(color: Colors.grey,),
+          const SizedBox(height: 8),
           GestureDetector(
             onTap: () {
               widget.logout.call();
             },
-            child: Text(tr("login.logout"), style: const TextStyle(color: AppColors.alert),),
+            child: Text(tr("login.logout"), style: const TextStyle(color: AppColors.alert, fontWeight: FontWeight.bold),),
           ),
         ],
       ),
-      actions: [
-        TextButton(
-          onPressed: () {
-            appRouter.pop();
-          },
-          child: const Text('Close'),
-        ),
-      ],
     );
   }
 }
