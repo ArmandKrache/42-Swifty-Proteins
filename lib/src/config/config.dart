@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter_gl/flutter_gl.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:logger/logger.dart';
@@ -12,7 +11,11 @@ bool biometricsAvailable = false;
 bool onGoingBiometrics = false;
 
 Future<void> checkBiometricsAvailability() async {
-  biometricsAvailable = await localAuth.isDeviceSupported();
+  try {
+    biometricsAvailable = await localAuth.isDeviceSupported();
+  } catch (e) {
+    biometricsAvailable = false;
+  }
 }
 
 Future<bool> authenticateWithBiometrics() async {

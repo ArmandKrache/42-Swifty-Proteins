@@ -59,11 +59,7 @@ class LigandCubit extends BaseCubit<LigandState, Ligand?> {
       ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
       Uint8List pngBytes = byteData!.buffer.asUint8List();
 
-      final tempDir = await getTemporaryDirectory();
-      final file = await File('${tempDir.path}/screenshot.png').writeAsBytes(pngBytes);
-      await file.writeAsBytes(pngBytes);
-
-      XFile xfile = XFile(file.path, name: "file");
+      XFile xfile = XFile.fromData(pngBytes);
       await Share.shareXFiles([xfile]);
       emit(LigandScreenshotSuccess(ligand: ligand));
     } catch (e) {
