@@ -68,6 +68,11 @@ class SignUpView extends HookWidget {
                     filled: true,
                     hintText: tr("login.username"),
                   ),
+                  onSubmitted: (value) async {
+                    if (usernameController.text != "" && passwordController.text != "") {
+                      signupCubit.signup(username: usernameController.text, password: passwordController.text);
+                    }
+                  },
                 ),
                 const SizedBox(height: 16,),
                 TextField(
@@ -83,6 +88,11 @@ class SignUpView extends HookWidget {
                     filled: true,
                     hintText: tr("login.password"),
                   ),
+                  onSubmitted: (value) async {
+                    if (usernameController.text != "" && passwordController.text != "") {
+                      signupCubit.signup(username: usernameController.text, password: passwordController.text);
+                    }
+                  },
                 ),
                 const SizedBox(height: 16,),
                 TextButton(

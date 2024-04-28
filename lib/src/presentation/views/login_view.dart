@@ -143,6 +143,11 @@ class LoginView extends HookWidget with WidgetsBindingObserver {
                     filled: true,
                     hintText: tr('login.username'),
                   ),
+                  onSubmitted: (value) {
+                    if (usernameController.text != "" && passwordController.text != "") {
+                      loginCubit.logInWithCredentials(usernameController.text, passwordController.text, resumed: resumed);
+                    }
+                  },
                 ),
                 const SizedBox(height: 16,),
                 TextField(
@@ -158,6 +163,11 @@ class LoginView extends HookWidget with WidgetsBindingObserver {
                     filled: true,
                     hintText: tr('login.password'),
                   ),
+                  onSubmitted: (value) {
+                    if (usernameController.text != "" && passwordController.text != "") {
+                      loginCubit.logInWithCredentials(usernameController.text, passwordController.text, resumed: resumed);
+                    }
+                  },
                 ),
               ],
             ),
