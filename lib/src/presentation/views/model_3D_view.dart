@@ -1,16 +1,10 @@
 import 'dart:async';
-import 'dart:io';
-import 'dart:ui' as ui;
-
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-
 import 'package:flutter_gl/flutter_gl.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:swifty_proteins/src/config/app_colors.dart';
 import 'package:swifty_proteins/src/config/app_strings.dart';
 import 'package:swifty_proteins/src/config/router/app_router.dart';
@@ -18,7 +12,6 @@ import 'package:swifty_proteins/src/domain/models/atom.dart';
 import 'package:swifty_proteins/src/domain/models/bond.dart';
 import 'package:swifty_proteins/src/domain/models/ligand/ligand.dart';
 import 'package:swifty_proteins/src/utils/extensions/custom_vector3.dart';
-import 'package:three_dart/three3d/objects/mesh.dart';
 
 import 'package:three_dart/three_dart.dart' as three;
 import 'package:three_dart_jsm/three_dart_jsm.dart' as three_jsm;
@@ -315,7 +308,7 @@ class _Model3DViewState extends State<Model3DView> {
   }
 
   void _handleTapDown(TapDownDetails details) {
-    final RenderBox overlay = Overlay.of(context)!.context.findRenderObject() as RenderBox;
+    final RenderBox overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
     final hit = _hitTest(details.localPosition, overlay.size);
 
     if (hit != null) {

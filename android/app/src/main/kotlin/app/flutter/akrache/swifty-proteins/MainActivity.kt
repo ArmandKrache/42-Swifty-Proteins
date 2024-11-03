@@ -1,4 +1,4 @@
-package app.flutter.test.tech.swifty_proteins
+package app.flutter.akrache.swifty-proteins
 
 import io.flutter.embedding.android.FlutterActivity
 

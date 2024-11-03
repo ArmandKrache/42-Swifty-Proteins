@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
 import 'package:swifty_proteins/src/config/app_assets.dart';
 import 'package:swifty_proteins/src/config/app_colors.dart';
 import 'package:swifty_proteins/src/config/config.dart';
@@ -31,9 +30,9 @@ class LoginView extends HookWidget with WidgetsBindingObserver {
         onLogin(context, loginCubit);
       } else {
         final observer = _LoginViewLifecycleObserver(context);
-        WidgetsBinding.instance?.addObserver(observer);
+        WidgetsBinding.instance.addObserver(observer);
         return () {
-          WidgetsBinding.instance?.removeObserver(observer);
+          WidgetsBinding.instance.removeObserver(observer);
         };
       }
       return null;

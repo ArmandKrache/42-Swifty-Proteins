@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:swifty_proteins/src/utils/resources/debouncer.dart';
 
@@ -44,7 +43,7 @@ class CustomSearchBar extends StatelessWidget {
         surfaceTintColor: MaterialStateProperty.all(Colors.white),
         shape: MaterialStateProperty.all(RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(4),
-          side: BorderSide(color: Colors.grey)
+          side: const BorderSide(color: Colors.grey)
         )),
       ),
     );

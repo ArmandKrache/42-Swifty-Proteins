@@ -39,7 +39,7 @@ for ligand in ligands_list:
     sdf_file = f'{ligand}_ideal.sdf'
     sdf_path = os.path.join(ligands_directory, sdf_file)
 
-    # UnComment to enable the download of all the files
+    ### UnComment to enable the download of all the files
     # sdf_url = f'https://files.rcsb.org/ligands/download/{ligand}_ideal.sdf'
     # download_sdf(sdf_url, sdf_path)
 

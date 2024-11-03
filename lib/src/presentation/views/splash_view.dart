@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:swifty_proteins/src/config/app_assets.dart';
 import 'package:swifty_proteins/src/config/router/app_router.dart';
-import 'package:swifty_proteins/src/presentation/views/login_view.dart';
 
 @RoutePage()
 class SplashView extends StatefulWidget {

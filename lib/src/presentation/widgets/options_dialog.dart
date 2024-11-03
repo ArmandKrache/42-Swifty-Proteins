@@ -1,9 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:swifty_proteins/src/config/app_colors.dart';
-import 'package:swifty_proteins/src/config/config.dart';
-import 'package:swifty_proteins/src/config/router/app_router.dart';
-import 'package:swifty_proteins/src/utils/resources/debouncer.dart';
 
 class OptionsDialog extends StatefulWidget {
   final Function logout;

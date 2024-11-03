@@ -1,6 +1,5 @@
 
 class AppAssets {
-  static const String testFileHEM = "assets/files/HEM.sdf";
   static const String ligandsNames = "assets/files/ligands.txt";
 
   static const String background = "assets/images/background.jpg";
